@@ -1,6 +1,5 @@
 import React from "react";
 import Home from "./containers/Homepage";
-import "./App.css";
 
 function App() {
   return (
