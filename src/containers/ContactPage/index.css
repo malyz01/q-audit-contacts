@@ -1,0 +1,17 @@
+.contactHeader {
+  text-align: center;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.contactContainer {
+  padding: 0 5rem;
+}
+
+.cellRender {
+  display: flex;
+  justify-content: space-around;
+}
