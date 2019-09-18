@@ -46,3 +46,5 @@ const auditorSchema = new mongoose.Schema({
     }
   ]
 });
+
+exports = mongoose.model("Auditor", auditorSchema);

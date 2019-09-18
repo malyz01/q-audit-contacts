@@ -11,6 +11,10 @@
   padding: 0 5rem;
 }
 
+.contactsColumn {
+  background-color: aqua;
+}
+
 .cellRender {
   display: flex;
   justify-content: space-around;
