@@ -10,16 +10,13 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-mongoose.connect(
-  "mongodb+srv://adminUser:q2a0u1d9it@database-nvwju.gcp.mongodb.net/test?retryWrites=true&w=majority/test",
-  {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-    useUnifiedTopology: true
-  }
-);
+mongoose.connect(`${process.env.MONGO_URL}/test`, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+});
 
 app.use("/api/auditor", require("./routes/auditor"));
 

@@ -9,32 +9,36 @@ const auditorSchema = new mongoose.Schema({
   country: String,
   amountOfAudits: {
     nz: {
-      observer: Number,
-      inTraining: Number,
-      support: Number,
-      lead: Number
+      observer: { type: Number, default: 0 },
+      inTraining: { type: Number, default: 0 },
+      support: { type: Number, default: 0 },
+      lead: { type: Number, default: 0 }
     },
     au: {
-      observer: Number,
-      inTraining: Number,
-      support: Number,
-      lead: Number
+      observer: { type: Number, default: 0 },
+      inTraining: { type: Number, default: 0 },
+      support: { type: Number, default: 0 },
+      lead: { type: Number, default: 0 }
     }
   },
   audits: {
     pending: [
       {
-        date: Date,
-        type: String,
-        country: String,
+        startDate: Date,
+        endDate: Date,
+        type: String, //Observer, In Training, Support, Lead
+        typeOfAudit: String, //Certification or Surveillance
+        country: String, //AU, NZ, AU/NZ
         provider: String
       }
     ],
     finish: [
       {
-        date: Date,
-        type: String,
-        country: String,
+        startDate: Date,
+        endDate: Date,
+        type: String, //Observer, In Training, Support, Lead
+        typeOfAudit: String, //Certification or Surveillance
+        country: String, //AU, NZ, AU/NZ
         provider: String
       }
     ]
@@ -47,4 +51,4 @@ const auditorSchema = new mongoose.Schema({
   ]
 });
 
-exports = mongoose.model("Auditor", auditorSchema);
+module.exports = mongoose.model("Auditor", auditorSchema);

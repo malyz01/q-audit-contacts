@@ -4,7 +4,8 @@ const Auditor = require("../models/auditor");
 
 router.get("/", async (req, res, next) => {
   try {
-    res.send("Auditor route");
+    const auditors = await Auditor.find({});
+    res.status(200).json(auditors);
   } catch (err) {
     return next({
       status: 400,
@@ -16,7 +17,7 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const auditor = await Auditor.create(req.body);
-    res.status(200).json(lease);
+    res.status(200).json(auditor);
   } catch (err) {
     return next({
       status: 400,
