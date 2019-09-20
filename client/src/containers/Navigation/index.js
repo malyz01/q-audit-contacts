@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -13,6 +13,8 @@ import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 
+import "./index.css";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -25,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MenuAppBar() {
+const Navigation = ({ history }) => {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -67,11 +69,24 @@ export default function MenuAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Photos
+          <Typography
+            onClick={() => {
+              history.push("/");
+            }}
+            className="navLinks"
+            variant="h6"
+          >
+            Home
           </Typography>
-          <Link to="/">Home</Link>
-          <Link to="/contacts">Contacts</Link>
+          <Typography
+            onClick={() => {
+              history.push("/contacts");
+            }}
+            className="navLinks"
+            variant="h6"
+          >
+            Contacts
+          </Typography>
           {auth && (
             <div>
               <IconButton
@@ -107,4 +122,6 @@ export default function MenuAppBar() {
       </AppBar>
     </div>
   );
-}
+};
+
+export default withRouter(Navigation);
