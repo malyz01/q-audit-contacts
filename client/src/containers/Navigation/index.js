@@ -72,6 +72,7 @@ export default function MenuAppBar() {
           </Typography>
           <Link to="/">Home</Link>
           <Link to="/contacts">Contacts</Link>
+          <Link to="/calendar">Calendar</Link>
           {auth && (
             <div>
               <IconButton

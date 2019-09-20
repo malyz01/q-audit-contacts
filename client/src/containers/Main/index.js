@@ -3,6 +3,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 
 import Home from "../Homepage";
 import Contact from "../ContactPage";
+import Calendar from "../Calendar";
 
 class Main extends React.Component {
   render() {
@@ -11,6 +12,7 @@ class Main extends React.Component {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/contacts" exact component={Contact} />
+          <Route path="/calendar" exact component={Calendar} />
 
           {/* <Route
             path="/login"
