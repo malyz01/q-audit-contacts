@@ -119,10 +119,10 @@ export class Main extends Component {
         columns={columns}
         className="contactsTable"
         getTdProps={(state, rowInfo, column, instance) => {
-          console.log(state);
-          console.log(rowInfo);
-          console.log(column);
-          console.log(instance);
+          // console.log(state);
+          // console.log(rowInfo);
+          // console.log(column);
+          // console.log(instance);
           if (column.id === "auLead") {
             return {
               style: {

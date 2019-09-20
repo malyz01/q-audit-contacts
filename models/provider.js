@@ -20,7 +20,7 @@ const providerSchema = new mongoose.Schema({
   name: String,
   address: String,
   auditType: String, //Certification, 1st Surveillance, 2nd Surveillance
-  standards: String, //ACIS, NDIS
+  standards: [String], // NDIS, ACIS2018, ACIS2013, ISO, HSQF
   auditors: [
     {
       id: {

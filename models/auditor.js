@@ -5,8 +5,8 @@ const auditorSchema = new mongoose.Schema({
   lastname: String,
   email: String,
   mobile: String,
-  type: String,
-  country: String,
+  type: String, // Observer, In Training, Support, Lead
+  country: String, // NZ, AU, NZ/AU
   amountOfAudits: {
     nz: {
       observer: { type: Number, default: 0 },
@@ -29,17 +29,29 @@ const auditorSchema = new mongoose.Schema({
         type: String, //Observer, In Training, Support, Lead
         typeOfAudit: String, //Certification or Surveillance
         country: String, //AU, NZ, AU/NZ
-        provider: String
+        provider: String,
+        hours: {
+          total: Number,
+          onsite: Number,
+          offsite: Number
+        },
+        note: [{ date: Date, message: String }]
       }
     ],
-    finish: [
+    completed: [
       {
         startDate: Date,
         endDate: Date,
         type: String, //Observer, In Training, Support, Lead
         typeOfAudit: String, //Certification or Surveillance
         country: String, //AU, NZ, AU/NZ
-        provider: String
+        provider: String,
+        hours: {
+          total: Number,
+          onsite: Number,
+          offsite: Number
+        },
+        note: [{ date: Date, message: String }]
       }
     ]
   },
