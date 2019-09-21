@@ -1,4 +1,4 @@
 .navLinks {
-  cursor: pointer;
-  margin: 0 1rem;
+  cursor: pointer !important;
+  margin: 0 1rem 0 0 !important;
 }

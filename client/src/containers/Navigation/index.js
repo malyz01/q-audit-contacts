@@ -1,133 +1,57 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormGroup from "@material-ui/core/FormGroup";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
 
-import "./index.css";
+import { styled } from "@material-ui/styles";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
-  title: {
-    flexGrow: 1
-  }
-}));
+import { Toolbar, Typography, AppBar } from "@material-ui/core";
 
-const Navigation = ({ history }) => {
-  const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+const StyledTypography = styled(Typography)({
+  margin: "0 1rem 0 0",
+  cursor: "pointer"
+});
 
-  function handleChange(event) {
-    setAuth(event.target.checked);
-  }
+const StyledToolbar = styled(Toolbar)({
+  display: "flex",
+  justifyContent: "space-between"
+});
 
-  function handleMenu(event) {
-    setAnchorEl(event.currentTarget);
-  }
+class Navigation extends React.Component {
+  handleOnClick = e => {
+    e.preventDefault();
+    this.props.history.push(e.target.getAttribute("to"));
+  };
 
-  function handleClose() {
-    setAnchorEl(null);
-  }
+  renderToolbar = () => (
+    <StyledToolbar>
+      <div style={{ display: "flex" }}>
+        <StyledTypography onClick={this.handleOnClick} to="/" variant="h6">
+          Home
+        </StyledTypography>
+        <StyledTypography
+          onClick={this.handleOnClick}
+          to="/contacts"
+          variant="h6"
+        >
+          Contacts
+        </StyledTypography>
+      </div>
 
-  return (
-    <div className={classes.root}>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? "Logout" : "Login"}
-        />
-      </FormGroup>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            onClick={() => {
-              history.push("/");
-            }}
-            className="navLinks"
-            variant="h6"
-          >
-            Home
-          </Typography>
-          <Typography
-            onClick={() => {
-              history.push("/contacts");
-            }}
-            className="navLinks"
-            variant="h6"
-          >
-            Contacts
-          </Typography>
-<<<<<<< HEAD
-          <Link to="/">Home</Link>
-          <Link to="/contacts">Contacts</Link>
-          <Link to="/calendar">Calendar</Link>
-=======
->>>>>>> 75672cde11591b9be2affb4b3f663f2702c17816
-          {auth && (
-            <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
+      <div>
+        <StyledTypography onClick={this.handleOnClick} to="/login" variant="h6">
+          Login
+        </StyledTypography>
+      </div>
+    </StyledToolbar>
   );
-};
+
+  render() {
+    return (
+      <React.Fragment>
+        <AppBar>{this.renderToolbar()}</AppBar>
+        <Toolbar />
+      </React.Fragment>
+    );
+  }
+}
 
 export default withRouter(Navigation);

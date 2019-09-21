@@ -2,8 +2,10 @@ import React from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 
 import Home from "../Homepage";
-import Contact from "../ContactPage";
+import Authpage from "../Authpage";
+import AuditorList from "../AuditorList";
 import Calendar from "../Calendar";
+import { AuditorForm } from "../Forms";
 
 class Main extends React.Component {
   render() {
@@ -11,8 +13,10 @@ class Main extends React.Component {
       <div>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/contacts" exact component={Contact} />
+          <Route path="/login" exact component={Authpage} />
+          <Route path="/contacts" exact component={AuditorList} />
           <Route path="/calendar" exact component={Calendar} />
+          <Route path="/newAuditor" exact component={AuditorForm} />
 
           {/* <Route
             path="/login"
