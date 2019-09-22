@@ -60,7 +60,9 @@ const auditorSchema = new mongoose.Schema({
       date: Date,
       message: String
     }
-  ]
+  ],
+  inviteToken: String,
+  inviteTokenExpires: Date
 });
 
 module.exports = mongoose.model("Auditor", auditorSchema);

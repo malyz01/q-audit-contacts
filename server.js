@@ -10,13 +10,15 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-mongoose.connect(`${process.env.MONGO_URL}/test`, {
+mongoose.connect(`${process.env.MONGO_URL}/qaudit`, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
   useCreateIndex: true,
   useUnifiedTopology: true
 });
+var db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
 
 app.use("/api/auditor", require("./routes/auditor"));
 

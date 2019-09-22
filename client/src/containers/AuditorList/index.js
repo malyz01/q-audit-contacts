@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import "./index.css";
 
 import { genData } from "../../helpers";
-import { Button } from "../../components/FormComponent";
+import { FabAdd, FabView, Header } from "../../components/FormComponent";
 import columns from "./columns";
 
 const data = genData(2);
@@ -13,8 +13,15 @@ const data = genData(2);
 export class Main extends Component {
   state = { selected: null };
 
-  handleButton = () => {
-    this.props.history.push("/newAuditor");
+  handleButton = ({ target: { innerText: name } }) => {
+    switch (name) {
+      case "VIEW":
+        return alert("View Selected");
+      case "ADD":
+        return this.props.history.push("/newAuditor");
+      default:
+        break;
+    }
   };
 
   handleTdProps = (state, rowInfo, column, instance) => {
@@ -39,7 +46,7 @@ export class Main extends Component {
         },
         style: {
           background:
-            rowInfo.index === this.state.selected ? "#94d4fc" : "white",
+            rowInfo.index === this.state.selected ? "#616dad" : "white",
           color: rowInfo.index === this.state.selected ? "white" : "black"
         }
       };
@@ -50,8 +57,17 @@ export class Main extends Component {
 
   renderHeader = () => {
     return (
-      <div className="contactHeader">
-        <h1>Auditor List</h1>
+      <div style={{ marginTop: "2rem" }}>
+        <Header />
+      </div>
+    );
+  };
+
+  renderButtons = () => {
+    return (
+      <div className="buttonContainer">
+        <FabView color="primary" onClick={this.handleButton} name="View" />
+        <FabAdd color="primary" onClick={this.handleButton} name="Add" />
       </div>
     );
   };
@@ -74,9 +90,7 @@ export class Main extends Component {
     return (
       <div className="contactContainer">
         {this.renderHeader()}
-        <div className="buttonContainer">
-          <Button onClick={this.handleButton}>Add</Button>
-        </div>
+        {this.renderButtons()}
         {this.renderTable()}
       </div>
     );

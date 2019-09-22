@@ -1,13 +1,28 @@
 import React from "react";
-// import _ from "lodash";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import _ from "lodash";
 import { Grid, FormControl, Paper } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
 
-import { TextField, Select } from "../../components/FormComponent";
+import {
+  TextField,
+  Select,
+  Header,
+  Button
+} from "../../components/FormComponent";
 
-const StyledPaper = styled(Paper)({
-  padding: "1rem 0 3rem",
-  marginTop: "4rem"
+import { auditor } from "../../store/actions";
+
+const MainContainer = styled(Paper)({
+  width: "500px",
+  padding: "1rem .5rem 1rem",
+  margin: "2rem auto"
+});
+
+const OptionalContainer = styled(Paper)({
+  margin: "1rem 0",
+  padding: ".5rem .5rem"
 });
 
 class AuditorForm extends React.Component {
@@ -17,35 +32,68 @@ class AuditorForm extends React.Component {
     email: "",
     mobile: "",
     type: "",
-    country: ""
+    country: "",
+    amountOfAudits: {
+      nz: {
+        lead: "",
+        support: "",
+        inTraining: "",
+        observer: ""
+      },
+      au: {
+        lead: "",
+        support: "",
+        inTraining: "",
+        observer: ""
+      }
+    }
   };
 
-  onChange = ({ target }) => {
+  onChange = ({ target }, area) => {
     if (Object.keys(target).length === 2) {
       this.setState({ [target.name]: target.value });
     } else {
       const name = target.getAttribute("name");
+      if (area === "nz" || area === "au") {
+        return this.setState(prevState => ({
+          amountOfAudits: {
+            ...prevState.amountOfAudits,
+            [area]: { ...prevState.amountOfAudits[area], [name]: target.value }
+          }
+        }));
+      }
       this.setState({ [name]: target.value });
     }
   };
 
-  renderHeader = () => (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <h2>Auditor</h2>
-    </div>
-  );
+  onClick = ({ target: { innerText: btn } }) => {
+    if (btn === "CANCEL") {
+      return this.props.history.push("/contacts");
+    }
+    this.props.addAuditor(this.state);
+  };
 
   renderInput = () => {
-    const { firstname, lastname, email, mobile } = this.state;
+    const items = ["firstname", "lastname"];
+    const { email, mobile } = this.state;
     return (
       <FormControl>
+        {items.map(item => {
+          return (
+            <TextField
+              key={item}
+              name={item}
+              onChange={this.onChange}
+              value={_.capitalize(this.state[item])}
+            />
+          );
+        })}
         <TextField
-          name="firstname"
+          name="email"
           onChange={this.onChange}
-          value={firstname}
+          value={email}
+          type="email"
         />
-        <TextField name="lastname" onChange={this.onChange} value={lastname} />
-        <TextField name="email" onChange={this.onChange} value={email} />
         <TextField name="mobile" onChange={this.onChange} value={mobile} />
       </FormControl>
     );
@@ -72,29 +120,88 @@ class AuditorForm extends React.Component {
     </div>
   );
 
-  render() {
-    console.log(this.state);
+  renderOptional = area => {
+    const items = ["lead", "support", "inTraining", "observer"];
     return (
-      <Grid container justify="center">
-        <Grid item xl={4}>
-          <StyledPaper elevation={10}>
+      <OptionalContainer elevation={2}>
+        <Grid container>
+          <Grid item xl={12}>
+            <div
+              style={{
+                margin: ".5rem auto 0",
+                textAlign: "center",
+                fontFamily: "Work Sans",
+                color: "#303F9F"
+              }}
+            >
+              Audits done in{" "}
+              <span style={{ textDecoration: "underline" }}>
+                {_.upperCase(area)}
+              </span>
+            </div>
+          </Grid>
+          {items.map(item => {
+            return (
+              <Grid key={item} item xl={3}>
+                <TextField
+                  style={{ marginTop: "0" }}
+                  type="number"
+                  name={item}
+                  onChange={e => this.onChange(e, area)}
+                  value={this.state.amountOfAudits[item]}
+                />
+              </Grid>
+            );
+          })}
+        </Grid>
+      </OptionalContainer>
+    );
+  };
+
+  renderButtons = () => {
+    const names = ["Submit", "Cancel"];
+    return (
+      <Grid container spacing={2}>
+        {names.map(name => (
+          <Grid key={name} item xl={6}>
+            <Button
+              color="primary"
+              onClick={this.onClick}
+              fullWidth
+              name={name}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    );
+  };
+
+  render() {
+    return (
+      <Grid container>
+        <Grid item xl={12}>
+          <MainContainer elevation={10}>
             <form
               style={{
                 display: "flex",
-                flexDirection: "column",
-                width: "500px",
-                margin: "0 auto"
+                flexDirection: "column"
               }}
             >
-              {this.renderHeader()}
+              <Header />
               {this.renderInput()}
               {this.renderSelect()}
+              {this.renderOptional("nz")}
+              {this.renderOptional("au")}
+              {this.renderButtons()}
             </form>
-          </StyledPaper>
+          </MainContainer>
         </Grid>
       </Grid>
     );
   }
 }
 
-export default AuditorForm;
+export default connect(
+  null,
+  { ...auditor }
+)(withRouter(AuditorForm));

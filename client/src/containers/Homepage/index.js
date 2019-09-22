@@ -2,12 +2,13 @@ import React from "react";
 
 import "./index.css";
 
+import { Header } from "../../components/FormComponent";
+
 class Home extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1>Homepage</h1>
-        <h2>Dashboard</h2>
+        <Header />
       </div>
     );
   }

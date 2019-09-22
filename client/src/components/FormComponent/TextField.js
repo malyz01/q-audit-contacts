@@ -12,11 +12,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function TextFields(props) {
   const classes = useStyles();
-
+  const label =
+    props.name === "inTraining" ? "In Training" : _.capitalize(props.name);
   return (
     <TextField
       {...props}
-      label={_.capitalize(props.name)}
+      label={label}
       className={classes.textField}
       margin="normal"
     />
