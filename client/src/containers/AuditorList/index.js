@@ -1,22 +1,40 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import _ from "lodash";
 
 import "./index.css";
 
 import { genData } from "../../helpers";
-import { FabAdd, FabView, Header } from "../../components/FormComponent";
+import Loader from "../../components/Loader";
+import {
+  FabAdd,
+  FabView,
+  FabDel,
+  FabClear,
+  Header
+} from "../../components/FormComponent";
 import columns from "./columns";
+import { auditor } from "../../store/actions";
 
 const data = genData(2);
 
 export class Main extends Component {
   state = { selected: null };
 
-  handleButton = ({ target: { innerText: name } }) => {
+  componentDidMount() {
+    this.props.fetchAuditors();
+  }
+
+  handleOnClick = ({ target: { innerText: name } }) => {
     switch (name) {
       case "VIEW":
         return alert("View Selected");
+      case "DELETE":
+        return alert("Delete Selected");
+      case "CLEAR":
+        return this.setState({ selected: null });
       case "ADD":
         return this.props.history.push("/newAuditor");
       default:
@@ -66,8 +84,12 @@ export class Main extends Component {
   renderButtons = () => {
     return (
       <div className="buttonContainer">
-        <FabView color="primary" onClick={this.handleButton} name="View" />
-        <FabAdd color="primary" onClick={this.handleButton} name="Add" />
+        <div>
+          <FabView color="primary" onClick={this.handleOnClick} name="View" />
+          <FabDel color="primary" onClick={this.handleOnClick} name="Delete" />
+          <FabClear color="primary" onClick={this.handleOnClick} name="Clear" />
+        </div>
+        <FabAdd color="primary" onClick={this.handleOnClick} name="Add" />
       </div>
     );
   };
@@ -76,25 +98,43 @@ export class Main extends Component {
     return (
       <ReactTable
         filterable
-        data={data}
+        data={this.props.auditors}
         columns={columns}
         className="contactsTable"
         getTdProps={this.handleTdProps}
         getTrProps={this.handleTrProps}
-        defaultPageSize={10}
+        defaultPageSize={20}
       />
     );
   };
 
   render() {
+    if (_.isEmpty(this.props.auditors)) {
+      return <Loader />;
+    }
     return (
-      <div className="contactContainer">
-        {this.renderHeader()}
-        {this.renderButtons()}
-        {this.renderTable()}
+      <div
+        onClick={e => {
+          e.preventDefault();
+          this.setState({ selected: null });
+        }}
+        className="contactContainer"
+      >
+        <div onClick={e => e.stopPropagation()}>
+          {this.renderHeader()}
+          {this.renderButtons()}
+          {this.renderTable()}
+        </div>
       </div>
     );
   }
 }
 
-export default withRouter(Main);
+const mapStateToProps = state => ({
+  auditors: state.auditor.all
+});
+
+export default connect(
+  mapStateToProps,
+  { ...auditor }
+)(withRouter(Main));

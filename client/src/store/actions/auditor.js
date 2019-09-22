@@ -1,13 +1,21 @@
 import api from "../../api";
 import err from "./error";
-import { ADD_AUDITOR } from "../types";
+import { ADD_AUDITOR, FETCH_AUDITORS } from "../types";
 
 export default {
   fetchAuditor: () => {
     console.log("fetchOne");
   },
-  fetchAuditors: () => {
-    console.log("fetchAll");
+  fetchAuditors: () => async dispatch => {
+    try {
+      const response = await api.get("/auditor");
+      dispatch({
+        type: FETCH_AUDITORS,
+        payload: response.data
+      });
+    } catch (e) {
+      dispatch(err.add(e));
+    }
   },
   addAuditor: data => async dispatch => {
     try {
@@ -16,9 +24,9 @@ export default {
         type: ADD_AUDITOR,
         payload: response.data
       });
-      return response.status;
+      return response.status === 200 && true;
     } catch (e) {
-      console.log(e);
+      dispatch(err.add(e));
     }
   }
 };

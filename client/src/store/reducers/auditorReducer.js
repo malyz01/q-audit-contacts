@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_AUDITORS:
-      return { ...state, all: [action.payload] };
+      return { ...state, all: action.payload };
     case FETCH_AUDITOR:
     case ADD_AUDITOR:
       return { ...state, selected: { ...action.payload } };

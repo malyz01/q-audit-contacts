@@ -35,16 +35,16 @@ class AuditorForm extends React.Component {
     country: "",
     amountOfAudits: {
       nz: {
-        lead: "",
-        support: "",
-        inTraining: "",
-        observer: ""
+        lead: 0,
+        support: 0,
+        inTraining: 0,
+        observer: 0
       },
       au: {
-        lead: "",
-        support: "",
-        inTraining: "",
-        observer: ""
+        lead: 0,
+        support: 0,
+        inTraining: 0,
+        observer: 0
       }
     }
   };
@@ -70,7 +70,10 @@ class AuditorForm extends React.Component {
     if (btn === "CANCEL") {
       return this.props.history.push("/contacts");
     }
-    this.props.addAuditor(this.state);
+    const response = this.props.addAuditor(this.state);
+    if (response) {
+      this.props.history.push("/contacts");
+    }
   };
 
   renderInput = () => {
@@ -177,6 +180,7 @@ class AuditorForm extends React.Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <Grid container>
         <Grid item xl={12}>

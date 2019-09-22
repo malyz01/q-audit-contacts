@@ -20,7 +20,19 @@ export default [
   },
   {
     Header: "Mobile",
-    accessor: "mobile"
+    accessor: "mobile",
+    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>
+  },
+  {
+    Header: "Type",
+    accessor: "type",
+    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>
+  },
+  {
+    Header: "Country",
+    accessor: "country",
+    maxWidth: 100,
+    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>
   },
   {
     Header: "NZ # of Audits Done",
@@ -29,9 +41,6 @@ export default [
         Header: "Observer",
         id: "nzObserver",
         accessor: d => d.amountOfAudits.nz.observer,
-        Cell: props => (
-          <div onClick={() => console.log(props)}>{props.value}</div>
-        ),
         maxWidth: 85
       },
       {
