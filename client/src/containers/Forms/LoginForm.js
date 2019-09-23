@@ -14,7 +14,7 @@ const FormContainer = styled(Paper)({
 
 class Login extends React.Component {
   handleOnClick = () => {
-    console.log("clicked");
+    alert("clicked");
   };
 
   renderHeader = () => (

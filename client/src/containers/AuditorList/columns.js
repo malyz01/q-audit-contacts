@@ -3,6 +3,11 @@ import _ from "lodash";
 
 export default [
   {
+    Header: "ID",
+    accessor: "_id",
+    show: false
+  },
+  {
     Header: "Name",
     columns: [
       {

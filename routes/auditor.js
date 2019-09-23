@@ -14,9 +14,33 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    const auditor = await Auditor.findById(req.params.id);
+    res.status(200).json(auditor);
+  } catch (err) {
+    return next({
+      status: 400,
+      message: err.message
+    });
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     const auditor = await Auditor.create(req.body);
+    res.status(200).json(auditor);
+  } catch (err) {
+    return next({
+      status: 400,
+      message: err.message
+    });
+  }
+});
+
+router.patch("/:id", async (req, res, next) => {
+  try {
+    const auditor = await Auditor.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json(auditor);
   } catch (err) {
     return next({

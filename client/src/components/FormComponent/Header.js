@@ -4,7 +4,12 @@ import { CardMedia } from "@material-ui/core";
 
 export default props => (
   <div
-    style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      marginTop: "2rem"
+    }}
   >
     <div style={{ width: "200px", marginBottom: "1rem" }}>
       <CardMedia

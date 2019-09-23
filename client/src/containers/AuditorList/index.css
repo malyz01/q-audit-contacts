@@ -1,26 +1,7 @@
-.contactHeader {
-  text-align: center;
-}
-
 .buttonContainer {
   display: flex;
-  justify-content: space-between;
-}
-
-.searchBar {
-  display: flex;
-  justify-content: flex-end;
 }
 
 .contactContainer {
   padding: 0 5rem;
-}
-
-.contactsColumn {
-  background-color: aqua;
-}
-
-.cellRender {
-  display: flex;
-  justify-content: space-around;
 }

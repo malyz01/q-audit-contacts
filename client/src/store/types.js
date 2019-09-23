@@ -1,6 +1,8 @@
 // Auditors
 export const FETCH_AUDITORS = "FETCH_AUDITORS";
 export const FETCH_AUDITOR = "FETCH_AUDITOR";
+export const SELECT_AUDITOR = "SELECT_AUDITOR";
+export const CLEAR_AUDITOR = "CLEAR_AUDITOR";
 export const ADD_AUDITOR = "ADD_AUDITOR";
 export const DEL_AUDITOR = "DEL_AUDITOR";
 

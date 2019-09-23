@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import _ from "lodash";
+
 import { Grid, FormControl, Paper } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
 
@@ -11,6 +12,7 @@ import {
   Header,
   Button
 } from "../../components/FormComponent";
+import Loader from "../../components/Loader";
 
 import { auditor } from "../../store/actions";
 
@@ -49,6 +51,20 @@ class AuditorForm extends React.Component {
     }
   };
 
+  async componentDidMount() {
+    const { match, fetchAuditor } = this.props;
+    if (match.path.includes("edit")) {
+      const result = await fetchAuditor(match.params.id);
+      if (result) {
+        this.setState({ ...this.props.auditor });
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.clearAuditor();
+  }
+
   onChange = ({ target }, area) => {
     if (Object.keys(target).length === 2) {
       this.setState({ [target.name]: target.value });
@@ -66,13 +82,19 @@ class AuditorForm extends React.Component {
     }
   };
 
-  onClick = ({ target: { innerText: btn } }) => {
+  onClick = async ({ target: { innerText: btn } }) => {
+    const { history, addAuditor, editAuditor, match } = this.props;
     if (btn === "CANCEL") {
-      return this.props.history.push("/contacts");
+      return history.push("/contacts");
     }
-    const response = this.props.addAuditor(this.state);
+    let response = "";
+    if (match.path.includes("edit")) {
+      response = await editAuditor(this.state);
+    } else {
+      response = await addAuditor(this.state);
+    }
     if (response) {
-      this.props.history.push("/contacts");
+      history.push("/contacts");
     }
   };
 
@@ -102,26 +124,28 @@ class AuditorForm extends React.Component {
     );
   };
 
-  renderSelect = () => (
-    <div style={{ display: "flex" }}>
-      <div>
-        <Select
-          name="type"
-          onChange={this.onChange}
-          value={this.state.type}
-          items={["Observer", "In Training", "Support", "Lead"]}
-        />
+  renderSelect = () => {
+    return (
+      <div style={{ display: "flex" }}>
+        <div>
+          <Select
+            name="type"
+            onChange={this.onChange}
+            value={this.state.type}
+            items={["Lead", "Support", "In Training", "Observer"]}
+          />
+        </div>
+        <div>
+          <Select
+            name="country"
+            onChange={this.onChange}
+            value={this.state.country}
+            items={["NZ/AU", "AU", "NZ"]}
+          />
+        </div>
       </div>
-      <div>
-        <Select
-          name="country"
-          onChange={this.onChange}
-          value={this.state.country}
-          items={["NZ", "AU", "NZ/AU"]}
-        />
-      </div>
-    </div>
-  );
+    );
+  };
 
   renderOptional = area => {
     const items = ["lead", "support", "inTraining", "observer"];
@@ -151,7 +175,7 @@ class AuditorForm extends React.Component {
                   type="number"
                   name={item}
                   onChange={e => this.onChange(e, area)}
-                  value={this.state.amountOfAudits[item]}
+                  value={this.state.amountOfAudits[area][item]}
                 />
               </Grid>
             );
@@ -180,7 +204,11 @@ class AuditorForm extends React.Component {
   };
 
   render() {
-    console.log(this.state);
+    if (this.props.match.path.includes("edit")) {
+      if (_.isEmpty(this.props.auditor)) {
+        return <Loader />;
+      }
+    }
     return (
       <Grid container>
         <Grid item xl={12}>
@@ -205,7 +233,11 @@ class AuditorForm extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  auditor: state.auditor.selected
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { ...auditor }
 )(withRouter(AuditorForm));

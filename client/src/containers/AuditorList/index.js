@@ -5,41 +5,41 @@ import { withRouter } from "react-router-dom";
 import _ from "lodash";
 
 import "./index.css";
+import { Grow } from "@material-ui/core";
 
-import { genData } from "../../helpers";
+// import { genData } from "../../helpers";
 import Loader from "../../components/Loader";
-import {
-  FabAdd,
-  FabView,
-  FabEdit,
-  FabDel,
-  FabClear,
-  Header
-} from "../../components/FormComponent";
+import Buttons from "./Buttons";
+import { FabAdd, Header } from "../../components/FormComponent";
 import columns from "./columns";
 import { auditor } from "../../store/actions";
 
-const data = genData(10);
+// const data = genData(10);
 
 export class Main extends Component {
-  state = { selected: null };
-
   componentDidMount() {
     this.props.fetchAuditors();
+  }
+
+  componentWillUnmount() {
+    this.props.clearAuditor();
   }
 
   handleOnClick = ({ target: { innerText: name } }) => {
     switch (name) {
       case "VIEW":
-        return alert("View Selected");
+        return alert("VIEW button clicked");
       case "EDIT":
-        return alert("Edit Selected");
+        return this.props.history.push(
+          `/auditor/${this.props.selected._id}/edit`
+        );
       case "DELETE":
-        return alert("Delete Selected");
+        return alert("DETELE button clicked");
       case "CLEAR":
-        return this.setState({ selected: null });
+        this.props.clearAuditor();
+        break;
       case "ADD":
-        return this.props.history.push("/newAuditor");
+        return this.props.history.push("/auditor/new");
       default:
         break;
     }
@@ -58,17 +58,16 @@ export class Main extends Component {
   };
 
   handleTrProps = (state, rowInfo, column, instance) => {
+    const { selectAuditor, selected } = this.props;
     if (rowInfo && rowInfo.row) {
       return {
         onClick: e => {
-          this.setState({
-            selected: rowInfo.index
-          });
+          rowInfo.original.index = rowInfo.index;
+          selectAuditor(rowInfo.original);
         },
         style: {
-          background:
-            rowInfo.index === this.state.selected ? "#616dad" : "white",
-          color: rowInfo.index === this.state.selected ? "white" : "black"
+          background: rowInfo.index === selected.index ? "#616dad" : "white",
+          color: rowInfo.index === selected.index ? "white" : "black"
         }
       };
     } else {
@@ -76,24 +75,13 @@ export class Main extends Component {
     }
   };
 
-  renderHeader = () => {
-    return (
-      <div style={{ marginTop: "2rem" }}>
-        <Header />
-      </div>
-    );
-  };
-
   renderButtons = () => {
     return (
       <div className="buttonContainer">
-        <div>
-          <FabView color="primary" onClick={this.handleOnClick} name="View" />
-          <FabEdit color="primary" onClick={this.handleOnClick} name="Edit" />
-          <FabDel color="primary" onClick={this.handleOnClick} name="Delete" />
-          <FabClear color="primary" onClick={this.handleOnClick} name="Clear" />
-        </div>
         <FabAdd color="primary" onClick={this.handleOnClick} name="Add" />
+        <Grow in={!_.isEmpty(this.props.selected)}>
+          <Buttons onClick={this.handleOnClick} />
+        </Grow>
       </div>
     );
   };
@@ -107,7 +95,7 @@ export class Main extends Component {
             _.lowerCase(filter.value)
           )
         }
-        data={data}
+        data={this.props.auditors}
         columns={columns}
         className="contactsTable"
         getTdProps={this.handleTdProps}
@@ -126,11 +114,12 @@ export class Main extends Component {
         onClick={e => {
           e.preventDefault();
           this.setState({ selected: null });
+          this.props.clearAuditor();
         }}
         className="contactContainer"
       >
         <div onClick={e => e.stopPropagation()}>
-          {this.renderHeader()}
+          <Header />
           {this.renderButtons()}
           {this.renderTable()}
         </div>
@@ -140,7 +129,8 @@ export class Main extends Component {
 }
 
 const mapStateToProps = state => ({
-  auditors: state.auditor.all
+  auditors: state.auditor.all,
+  selected: state.auditor.selected
 });
 
 export default connect(

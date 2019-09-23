@@ -16,7 +16,8 @@ class Main extends React.Component {
           <Route path="/login" exact component={Authpage} />
           <Route path="/contacts" exact component={AuditorList} />
           <Route path="/calendar" exact component={Calendar} />
-          <Route path="/newAuditor" exact component={AuditorForm} />
+          <Route path="/auditor/new" exact component={AuditorForm} />
+          <Route path="/auditor/:id/edit" exact component={AuditorForm} />
 
           {/* <Route
             path="/login"

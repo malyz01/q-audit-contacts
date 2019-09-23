@@ -1,10 +1,25 @@
 import api from "../../api";
 import err from "./error";
-import { ADD_AUDITOR, FETCH_AUDITORS } from "../types";
+import {
+  ADD_AUDITOR,
+  FETCH_AUDITORS,
+  FETCH_AUDITOR,
+  SELECT_AUDITOR,
+  CLEAR_AUDITOR
+} from "../types";
 
 export default {
-  fetchAuditor: () => {
-    console.log("fetchOne");
+  fetchAuditor: id => async dispatch => {
+    try {
+      const response = await api.get(`/auditor/${id}`);
+      dispatch({
+        type: FETCH_AUDITOR,
+        payload: response.data
+      });
+      return response.status === 200;
+    } catch (e) {
+      dispatch(err.add(e));
+    }
   },
   fetchAuditors: () => async dispatch => {
     try {
@@ -17,6 +32,13 @@ export default {
       dispatch(err.add(e));
     }
   },
+  selectAuditor: data => ({
+    type: SELECT_AUDITOR,
+    payload: data
+  }),
+  clearAuditor: () => ({
+    type: CLEAR_AUDITOR
+  }),
   addAuditor: data => async dispatch => {
     try {
       const response = await api.post("/auditor", data);
@@ -24,7 +46,19 @@ export default {
         type: ADD_AUDITOR,
         payload: response.data
       });
-      return response.status === 200 && true;
+      return response.status === 200;
+    } catch (e) {
+      dispatch(err.add(e));
+    }
+  },
+  editAuditor: (id, data) => async dispatch => {
+    try {
+      const response = await api.patch(`/auditor/${id}`, data);
+      dispatch({
+        type: FETCH_AUDITOR,
+        payload: response.data
+      });
+      return response.status === 200;
     } catch (e) {
       dispatch(err.add(e));
     }
