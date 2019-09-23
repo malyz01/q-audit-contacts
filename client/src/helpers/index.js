@@ -1,7 +1,14 @@
 import faker from "faker";
 
+const countries = ["NZ", "AU", "NZ/AU"];
+const types = ["Observer", "In Training", "Support", "Lead"];
+
+const randomPick = items => {
+  return items[genNum(items.length)];
+};
+
 const genNum = num => {
-  return Math.ceil(Math.random() * num) + 1;
+  return Math.floor(Math.random() * num);
 };
 
 export const genData = num => {
@@ -12,18 +19,20 @@ export const genData = num => {
       lastname: faker.name.lastName(),
       email: faker.internet.email(),
       mobile: faker.phone.phoneNumber(),
+      type: randomPick(types),
+      country: randomPick(countries),
       amountOfAudits: {
         nz: {
-          observer: genNum(4),
-          inTraining: genNum(4),
-          support: genNum(4),
-          lead: genNum(4)
+          observer: genNum(4 + 1),
+          inTraining: genNum(4 + 1),
+          support: genNum(4 + 1),
+          lead: genNum(10)
         },
         au: {
-          observer: genNum(4),
-          inTraining: genNum(4),
-          support: genNum(4),
-          lead: genNum(4)
+          observer: genNum(4 + 1),
+          inTraining: genNum(4 + 1),
+          support: genNum(4 + 1),
+          lead: genNum(10)
         }
       }
     });

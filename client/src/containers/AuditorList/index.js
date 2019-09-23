@@ -11,6 +11,7 @@ import Loader from "../../components/Loader";
 import {
   FabAdd,
   FabView,
+  FabEdit,
   FabDel,
   FabClear,
   Header
@@ -18,7 +19,7 @@ import {
 import columns from "./columns";
 import { auditor } from "../../store/actions";
 
-const data = genData(2);
+const data = genData(10);
 
 export class Main extends Component {
   state = { selected: null };
@@ -31,6 +32,8 @@ export class Main extends Component {
     switch (name) {
       case "VIEW":
         return alert("View Selected");
+      case "EDIT":
+        return alert("Edit Selected");
       case "DELETE":
         return alert("Delete Selected");
       case "CLEAR":
@@ -86,6 +89,7 @@ export class Main extends Component {
       <div className="buttonContainer">
         <div>
           <FabView color="primary" onClick={this.handleOnClick} name="View" />
+          <FabEdit color="primary" onClick={this.handleOnClick} name="Edit" />
           <FabDel color="primary" onClick={this.handleOnClick} name="Delete" />
           <FabClear color="primary" onClick={this.handleOnClick} name="Clear" />
         </div>
@@ -98,7 +102,12 @@ export class Main extends Component {
     return (
       <ReactTable
         filterable
-        data={this.props.auditors}
+        defaultFilterMethod={(filter, row) =>
+          _.lowerCase(String(row[filter.id])).includes(
+            _.lowerCase(filter.value)
+          )
+        }
+        data={data}
         columns={columns}
         className="contactsTable"
         getTdProps={this.handleTdProps}

@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 
 export default [
   {
@@ -32,7 +33,9 @@ export default [
     Header: "Country",
     accessor: "country",
     maxWidth: 100,
-    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>
+    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
+    filterMethod: (filter, row) =>
+      _.lowerCase(row[filter.id]).includes(_.lowerCase(filter.value))
   },
   {
     Header: "NZ # of Audits Done",
