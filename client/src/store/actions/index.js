@@ -1,3 +1,5 @@
-import audit from "./auditor";
+import auditorActions from "./auditor";
+import modalActions from "./modal";
 
-export const auditor = audit;
+export const auditor = auditorActions;
+export const modal = modalActions;

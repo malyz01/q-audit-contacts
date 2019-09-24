@@ -25,7 +25,7 @@ export class Main extends Component {
     this.props.clearAuditor();
   }
 
-  handleOnClick = ({ target: { innerText: name } }) => {
+  handleOnClick = async ({ target: { innerText: name } }) => {
     switch (name) {
       case "VIEW":
         return alert("VIEW button clicked");
@@ -34,7 +34,11 @@ export class Main extends Component {
           `/auditor/${this.props.selected._id}/edit`
         );
       case "DELETE":
-        return alert("DETELE button clicked");
+        const result = await this.props.deleteAuditor(this.props.selected._id);
+        if (result) {
+          this.props.fetchAuditors();
+        }
+        break;
       case "CLEAR":
         this.props.clearAuditor();
         break;

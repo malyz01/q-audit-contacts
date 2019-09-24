@@ -50,4 +50,16 @@ router.patch("/:id", async (req, res, next) => {
   }
 });
 
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const auditor = await Auditor.findByIdAndDelete(req.params.id);
+    res.status(200).json(auditor);
+  } catch (err) {
+    return next({
+      status: 400,
+      message: err.message
+    });
+  }
+});
+
 module.exports = router;

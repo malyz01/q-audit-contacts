@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const auditorSchema = new mongoose.Schema({
   firstname: String,
   lastname: String,
-  email: String,
-  mobile: String,
+  email: [{ type: String, unique: true }],
+  mobile: [{ type: String, unique: true }],
   type: String, // Observer, In Training, Support, Lead
   country: String, // NZ, AU, NZ/AU
   amountOfAudits: {

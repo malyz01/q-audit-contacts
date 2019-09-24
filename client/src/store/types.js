@@ -6,6 +6,9 @@ export const CLEAR_AUDITOR = "CLEAR_AUDITOR";
 export const ADD_AUDITOR = "ADD_AUDITOR";
 export const DEL_AUDITOR = "DEL_AUDITOR";
 
+// Modal
+export const TOGGLE = "TOGGLE";
+
 // Error
 export const ADD_ERROR = "ADD_ERROR";
 export const CLEAR_ERROR = "CLEAR_ERROR";

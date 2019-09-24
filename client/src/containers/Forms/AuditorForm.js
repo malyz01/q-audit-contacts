@@ -17,7 +17,7 @@ import Loader from "../../components/Loader";
 import { auditor } from "../../store/actions";
 
 const MainContainer = styled(Paper)({
-  width: "500px",
+  width: "450px",
   padding: "1rem .5rem 1rem",
   margin: "2rem auto"
 });
@@ -32,7 +32,9 @@ class AuditorForm extends React.Component {
     firstname: "",
     lastname: "",
     email: "",
+    email2: "",
     mobile: "",
+    mobile2: "",
     type: "",
     country: "",
     amountOfAudits: {
@@ -89,7 +91,7 @@ class AuditorForm extends React.Component {
     }
     let response = "";
     if (match.path.includes("edit")) {
-      response = await editAuditor(this.state);
+      response = await editAuditor(match.params.id, this.state);
     } else {
       response = await addAuditor(this.state);
     }
@@ -100,26 +102,31 @@ class AuditorForm extends React.Component {
 
   renderInput = () => {
     const items = ["firstname", "lastname"];
-    const { email, mobile } = this.state;
+    const items2 = ["email", "email2", "mobile", "mobile2"];
     return (
       <FormControl>
-        {items.map(item => {
-          return (
-            <TextField
-              key={item}
-              name={item}
-              onChange={this.onChange}
-              value={_.capitalize(this.state[item])}
-            />
-          );
-        })}
-        <TextField
-          name="email"
-          onChange={this.onChange}
-          value={email}
-          type="email"
-        />
-        <TextField name="mobile" onChange={this.onChange} value={mobile} />
+        {items.map(item => (
+          <TextField
+            key={item}
+            name={item}
+            onChange={this.onChange}
+            value={this.state[item]}
+          />
+        ))}
+        <Grid container>
+          {items2.map(item => (
+            <Grid key={item} item xs={6}>
+              <div style={{ width: "210px" }}>
+                <TextField
+                  fullWidth
+                  name={item}
+                  onChange={this.onChange}
+                  value={this.state[item]}
+                />
+              </div>
+            </Grid>
+          ))}
+        </Grid>
       </FormControl>
     );
   };
@@ -152,7 +159,7 @@ class AuditorForm extends React.Component {
     return (
       <OptionalContainer elevation={2}>
         <Grid container>
-          <Grid item xl={12}>
+          <Grid item xs={12}>
             <div
               style={{
                 margin: ".5rem auto 0",
@@ -169,7 +176,7 @@ class AuditorForm extends React.Component {
           </Grid>
           {items.map(item => {
             return (
-              <Grid key={item} item xl={3}>
+              <Grid key={item} item xs={3}>
                 <TextField
                   style={{ marginTop: "0" }}
                   type="number"
@@ -190,7 +197,7 @@ class AuditorForm extends React.Component {
     return (
       <Grid container spacing={2}>
         {names.map(name => (
-          <Grid key={name} item xl={6}>
+          <Grid key={name} item xs={6}>
             <Button
               color="primary"
               onClick={this.onClick}
@@ -211,7 +218,7 @@ class AuditorForm extends React.Component {
     }
     return (
       <Grid container>
-        <Grid item xl={12}>
+        <Grid item xs={12}>
           <MainContainer elevation={10}>
             <form
               style={{

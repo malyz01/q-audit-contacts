@@ -62,5 +62,13 @@ export default {
     } catch (e) {
       dispatch(err.add(e));
     }
+  },
+  deleteAuditor: id => async dispatch => {
+    try {
+      const response = await api.delete(`/auditor/${id}`);
+      return response.status === 200;
+    } catch (e) {
+      dispatch(err.add(e));
+    }
   }
 };
