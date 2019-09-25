@@ -6,6 +6,7 @@ import _ from "lodash";
 import { Grid, FormControl, Paper } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
 
+import { ISAuditorForm } from "./InitialState";
 import {
   TextField,
   Select,
@@ -13,7 +14,6 @@ import {
   Button
 } from "../../components/FormComponent";
 import Loader from "../../components/Loader";
-
 import { auditor } from "../../store/actions";
 
 const MainContainer = styled(Paper)({
@@ -28,37 +28,26 @@ const OptionalContainer = styled(Paper)({
 });
 
 class AuditorForm extends React.Component {
-  state = {
-    firstname: "",
-    lastname: "",
-    email: "",
-    email2: "",
-    mobile: "",
-    mobile2: "",
-    type: "",
-    country: "",
-    amountOfAudits: {
-      nz: {
-        lead: 0,
-        support: 0,
-        inTraining: 0,
-        observer: 0
-      },
-      au: {
-        lead: 0,
-        support: 0,
-        inTraining: 0,
-        observer: 0
-      }
-    }
-  };
+  state = { ...ISAuditorForm };
 
   async componentDidMount() {
-    const { match, fetchAuditor } = this.props;
+    const { match, fetchAuditor, auditor } = this.props;
     if (match.path.includes("edit")) {
       const result = await fetchAuditor(match.params.id);
       if (result) {
-        this.setState({ ...this.props.auditor });
+        let data;
+        if (auditor.mobile.length > 1) {
+          const [mobile1, mobile2] = auditor.mobile;
+          data = {
+            mobile1,
+            mobile2
+          };
+        } else {
+          data = {
+            mobile1: auditor.mobile[0]
+          };
+        }
+        this.setState({ ...auditor, ...data });
       }
     }
   }
@@ -72,6 +61,13 @@ class AuditorForm extends React.Component {
       this.setState({ [target.name]: target.value });
     } else {
       const name = target.getAttribute("name");
+      if (name === "mobile1" || name === "mobile2") {
+        this.setState({ [name]: target.value });
+        return this.setState(prev => {
+          let value = _.compact([prev.mobile1, prev.mobile2]);
+          return { mobile: value };
+        });
+      }
       if (area === "nz" || area === "au") {
         return this.setState(prevState => ({
           amountOfAudits: {
@@ -101,8 +97,8 @@ class AuditorForm extends React.Component {
   };
 
   renderInput = () => {
-    const items = ["firstname", "lastname"];
-    const items2 = ["email", "email2", "mobile", "mobile2"];
+    const items = ["firstname", "lastname", "email"];
+    const items2 = ["mobile1", "mobile2"];
     return (
       <FormControl>
         {items.map(item => (

@@ -27,7 +27,12 @@ export default [
   {
     Header: "Mobile",
     accessor: "mobile",
-    Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>
+    Cell: ({ value }) => (
+      <div style={{ textAlign: "center" }}>
+        <div>{value[0]}</div>
+        <div>{value[1]}</div>
+      </div>
+    )
   },
   {
     Header: "Type",

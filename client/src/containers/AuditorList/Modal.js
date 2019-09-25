@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function DeleteModal(props) {
   const classes = useStyles();
-  console.log(props);
+
   return (
     <div>
       <Modal
@@ -28,13 +28,15 @@ export default function DeleteModal(props) {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={props.open}
-        onCLose={props.onClose}
+        onClose={props.onClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500
         }}
-      ></Modal>
+      >
+        <Fade in={props.open}></Fade>
+      </Modal>
     </div>
   );
 }

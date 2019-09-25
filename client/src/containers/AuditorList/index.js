@@ -53,11 +53,16 @@ export class Main extends Component {
     if (column.id.includes("nz") || column.id.includes("au")) {
       return {
         style: {
-          textAlign: "center"
+          textAlign: "center",
+          alignSelf: "center"
         }
       };
     } else {
-      return {};
+      return {
+        style: {
+          alignSelf: "center"
+        }
+      };
     }
   };
 
@@ -70,7 +75,7 @@ export class Main extends Component {
           selectAuditor(rowInfo.original);
         },
         style: {
-          background: rowInfo.index === selected.index ? "#616dad" : "white",
+          background: rowInfo.index === selected.index ? "#3F51B5" : "white",
           color: rowInfo.index === selected.index ? "white" : "black"
         }
       };
