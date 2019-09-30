@@ -75,8 +75,8 @@ export class Main extends Component {
           selectAuditor(rowInfo.original);
         },
         style: {
-          background: rowInfo.index === selected.index ? "#3F51B5" : "white",
-          color: rowInfo.index === selected.index ? "white" : "black"
+          borderLeft: rowInfo.index === selected.index && "4px solid #3F51B5",
+          backgroundColor: rowInfo.index === selected.index && "#eaf0ff"
         }
       };
     } else {
