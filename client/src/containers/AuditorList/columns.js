@@ -8,24 +8,24 @@ export default [
     show: false
   },
   {
-    Header: "Name",
+    Header: "NAME",
     columns: [
       {
-        Header: "Firstname",
+        Header: "FIRSTNAME",
         accessor: "firstname"
       },
       {
-        Header: "Lastname",
+        Header: "LASTNAME",
         accessor: "lastname"
       }
     ]
   },
   {
-    Header: "Email",
+    Header: "EMAIL",
     accessor: "email"
   },
   {
-    Header: "Mobile",
+    Header: "MOBILE",
     accessor: "mobile",
     Cell: ({ value }) => (
       <div style={{ textAlign: "center" }}>
@@ -35,12 +35,12 @@ export default [
     )
   },
   {
-    Header: "Type",
+    Header: "TYPE",
     accessor: "type",
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>
   },
   {
-    Header: "Country",
+    Header: "COUNTRY",
     accessor: "country",
     maxWidth: 100,
     Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>,
@@ -48,28 +48,28 @@ export default [
       _.lowerCase(row[filter.id]).includes(_.lowerCase(filter.value))
   },
   {
-    Header: "NZ # of Audits Done",
+    Header: "NZ - AUDITS DONE",
     columns: [
       {
-        Header: "Observer",
+        Header: "OA",
         id: "nzObserver",
         accessor: d => d.amountOfAudits.nz.observer,
         maxWidth: 85
       },
       {
-        Header: "In Training",
+        Header: "ITA",
         id: "nzInTraining",
         accessor: d => d.amountOfAudits.nz.inTraining,
         maxWidth: 85
       },
       {
-        Header: "Support",
+        Header: "SA",
         id: "nzSupport",
         accessor: d => d.amountOfAudits.nz.support,
         maxWidth: 85
       },
       {
-        Header: "Lead",
+        Header: "LA",
         id: "nzLead",
         accessor: d => d.amountOfAudits.nz.lead,
         maxWidth: 85
@@ -77,28 +77,28 @@ export default [
     ]
   },
   {
-    Header: "AU # of Audits Done",
+    Header: "AU - AUDITS DONE",
     columns: [
       {
-        Header: "Observer",
+        Header: "OA",
         id: "auObserver",
         accessor: d => d.amountOfAudits.au.observer,
         maxWidth: 85
       },
       {
-        Header: "In Training",
+        Header: "ITA",
         id: "auInTraining",
         accessor: d => d.amountOfAudits.au.inTraining,
         maxWidth: 85
       },
       {
-        Header: "Support",
+        Header: "SA",
         id: "auSupport",
         accessor: d => d.amountOfAudits.au.support,
         maxWidth: 85
       },
       {
-        Header: "Lead",
+        Header: "LA",
         id: "auLead",
         accessor: d => d.amountOfAudits.au.lead,
         maxWidth: 85
