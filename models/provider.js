@@ -13,7 +13,7 @@ const providerSchema = new mongoose.Schema({
     displayDate: {
       startDate: Date,
       endDate: Date,
-      status: String //Tentaive, propose, confirmed, done
+      status: String //Tentative, Proposed, Confirmed, Done
     }
   },
   numberOfDaysOfAudit: String,

@@ -135,7 +135,19 @@ class AuditorForm extends React.Component {
             name="type"
             onChange={this.onChange}
             value={this.state.type}
-            items={["Lead", "Support", "In Training", "Observer"]}
+            items={[
+              "Lead",
+              "Support",
+              "In Training",
+              "Observer",
+              "Consumer",
+              "Technical Expert",
+              "Lead-Clinical",
+              "Lead-Non-Clinical",
+              "Support-Clinical",
+              "Support-Non-Clinincal",
+              "Support/Consumer"
+            ]}
           />
         </div>
         <div>
@@ -149,6 +161,8 @@ class AuditorForm extends React.Component {
       </div>
     );
   };
+
+  // Consumer , Technical Expert, Support/Consumer
 
   renderOptional = area => {
     const items = ["lead", "support", "inTraining", "observer"];

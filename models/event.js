@@ -7,7 +7,13 @@ const eventSchema = new mongoose.Schema({
       startDate: Date,
       endDate: Date,
       status: String, //Tentative, Proposed, Confirmed, Done
-      providerName: String,
+      provider: {
+        id: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Provider"
+        },
+        name: String
+      },
       auditType: String,
       standards: String,
       auditors: [
