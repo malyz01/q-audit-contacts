@@ -4,6 +4,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import Home from "../Homepage";
 import Authpage from "../Authpage";
 import AuditorList from "../AuditorList";
+import AuditDetails from "../AuditorDetails";
 import Calendar from "../Calendar";
 import { AuditorForm } from "../Forms";
 
@@ -17,6 +18,7 @@ class Main extends React.Component {
           <Route path="/contacts" exact component={AuditorList} />
           <Route path="/calendar" exact component={Calendar} />
           <Route path="/auditor/new" exact component={AuditorForm} />
+          <Route path="/auditor/:id" exact component={AuditDetails} />
           <Route path="/auditor/:id/edit" exact component={AuditorForm} />
 
           {/* <Route

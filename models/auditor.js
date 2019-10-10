@@ -66,3 +66,13 @@ const auditorSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Auditor", auditorSchema);
+
+/*
+Location
+Preferred Audit Location
+Confirmation of observation Audits completed - Yes/No
+  - client name
+  - date
+  - lead auditor name
+  - lead auditor evaluation - Yes/No
+*/

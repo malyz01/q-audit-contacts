@@ -28,7 +28,7 @@ export class Main extends Component {
   handleOnClick = async ({ target: { innerText: name } }) => {
     switch (name) {
       case "VIEW":
-        return alert("VIEW button clicked");
+        return this.props.history.push(`/auditor/${this.props.selected._id}`);
       case "EDIT":
         return this.props.history.push(
           `/auditor/${this.props.selected._id}/edit`
@@ -109,7 +109,7 @@ export class Main extends Component {
         className="contactsTable"
         getTdProps={this.handleTdProps}
         getTrProps={this.handleTrProps}
-        defaultPageSize={20}
+        defaultPageSize={10}
       />
     );
   };
