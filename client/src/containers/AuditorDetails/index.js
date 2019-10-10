@@ -12,6 +12,10 @@ class index extends React.Component {
     this.props.fetchAuditor(this.props.match.params.id);
   }
 
+  componentWillUnmount() {
+    this.props.clearAuditor();
+  }
+
   render() {
     const { auditor } = this.props;
     if (_.isEmpty(auditor)) {
