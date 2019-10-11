@@ -2,10 +2,19 @@ import React from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 
-import { Container, Switch, Paper, Box } from "@material-ui/core";
+import { Container, Grid, Box, Paper } from "@material-ui/core";
 
 import Loader from "../../components/Loader";
+import AuditView from "./AuditView";
+import AuditsDone from "./AuditsDone";
 import { auditor } from "../../store/actions";
+
+const pending = {
+  type: "Pending"
+};
+const completed = {
+  type: "Completed"
+};
 
 class index extends React.Component {
   componentDidMount() {
@@ -24,24 +33,25 @@ class index extends React.Component {
 
     return (
       <Container>
-        <h1>
+        <Box mt={2} fontFamily="Roboto" fontSize="h4.fontSize" fontWeight={500}>
           {auditor.firstname} {auditor.lastname}
-        </h1>
-        <h2>{auditor.type}</h2>
-        <Switch />
-        <Paper>
-          <Box p={3}>
-            <Box component="div" textAlign="right" width={1 / 4}>
-              Location:
-            </Box>
-            <Box component="div" textAlign="right" width={1 / 4}>
-              Preferred Audit Location:
-            </Box>
-            <Box component="div" textAlign="right" width={1 / 4}>
-              Observation Audits Confirmed:
-            </Box>
-          </Box>
-        </Paper>
+        </Box>
+        <Box mb={2} fontFamily="Roboto" fontSize="h6.fontSize">
+          {auditor.type}
+        </Box>
+        <Grid justify="center" spacing={3} container>
+          <Grid item xs={12} md={12}>
+            <Paper elevation={2}>
+              <AuditView />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <AuditsDone audit={completed} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <AuditsDone audit={pending} />
+          </Grid>
+        </Grid>
       </Container>
     );
   }

@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, Grid, Paper } from "@material-ui/core";
+import { TextField, Container, Paper } from "@material-ui/core";
 import VpnKeyRoundedIcon from "@material-ui/icons/VpnKeyRounded";
 
 import { styled } from "@material-ui/styles";
@@ -53,27 +53,25 @@ class Login extends React.Component {
 
   render() {
     return (
-      <Grid container>
-        <Grid xl={12} item>
-          <FormContainer elevation={10}>
-            <form
-              style={{
-                display: "flex",
-                flexDirection: "column"
-              }}
-            >
-              {this.renderHeader()}
-              {this.renderField()}
-              <Button
-                color="primary"
-                name="Submit"
-                size="large"
-                onClick={this.handleOnClick}
-              />
-            </form>
-          </FormContainer>
-        </Grid>
-      </Grid>
+      <Container>
+        <FormContainer elevation={10}>
+          <form
+            style={{
+              display: "flex",
+              flexDirection: "column"
+            }}
+          >
+            {this.renderHeader()}
+            {this.renderField()}
+            <Button
+              color="primary"
+              name="Submit"
+              size="large"
+              onClick={this.handleOnClick}
+            />
+          </form>
+        </FormContainer>
+      </Container>
     );
   }
 }
