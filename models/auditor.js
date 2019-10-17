@@ -25,14 +25,14 @@ const auditorSchema = new mongoose.Schema({
   },
   audits: [
     {
-      auditId: { type: mongoose.Schema.Types.ObjectId, ref: "Audit" },
+      audit: { type: mongoose.Schema.Types.ObjectId, ref: "Audit" },
       evaluation: {
         date: Date,
         leadAuditor: String,
         isSubmitted: Boolean
       },
       hours: {
-        offiste: Number,
+        offsite: Number,
         onsite: Number,
         total: Number
       }
@@ -44,8 +44,12 @@ const auditorSchema = new mongoose.Schema({
       message: String
     }
   ],
-  inviteToken: String,
-  inviteTokenExpires: Date
+  accessToken: String,
+  accessTokenExpiry: Date,
+  availability: {
+    date: [Date],
+    notes: [String]
+  }
 });
 
 module.exports = mongoose.model("Auditor", auditorSchema);
