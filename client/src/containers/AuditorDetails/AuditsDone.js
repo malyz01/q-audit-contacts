@@ -38,7 +38,7 @@ class AuditsDone extends React.Component {
               {audit.type.toUpperCase()}
             </Box>
           </Box>
-          <Box mt={3}>Audits list</Box>
+          <Box mt={3}>Audit list</Box>
         </Box>
       </Paper>
     );

@@ -23,61 +23,21 @@ const auditorSchema = new mongoose.Schema({
       lead: { type: Number, default: 0 }
     }
   },
-  audits: {
-    pending: [
-      {
-        startDate: Date,
-        endDate: Date,
-        type: String, //Observer, In Training, Support, Lead
-        typeOfAudit: String, //Certification or Surveillance
-        otherAuditors: [
-          {
-            id: {
-              type: mongoose.Schema.Types.ObjectId,
-              ref: "Auditor"
-            },
-            name: String,
-            type: String
-          }
-        ],
-        country: String, //AU, NZ, AU/NZ
-        provider: String,
-        hours: {
-          total: Number,
-          onsite: Number,
-          offsite: Number
-        },
-        note: [{ date: Date, message: String }]
+  audits: [
+    {
+      auditId: { type: mongoose.Schema.Types.ObjectId, ref: "Audit" },
+      evaluation: {
+        date: Date,
+        leadAuditor: String,
+        isSubmitted: Boolean
+      },
+      hours: {
+        offiste: Number,
+        onsite: Number,
+        total: Number
       }
-    ],
-    completed: [
-      {
-        startDate: Date,
-        endDate: Date,
-        type: String, //Observer, In Training, Support, Lead
-        typeOfAudit: String, //Certification or Surveillance,
-        evaluation: { date: Date, received: Boolean, name: String },
-        otherAuditors: [
-          {
-            id: {
-              type: mongoose.Schema.Types.ObjectId,
-              ref: "Auditor"
-            },
-            name: String,
-            type: String
-          }
-        ],
-        country: String, //AU, NZ, AU/NZ
-        provider: String,
-        hours: {
-          total: Number,
-          onsite: Number,
-          offsite: Number
-        },
-        note: [{ date: Date, message: String }]
-      }
-    ]
-  },
+    }
+  ],
   notes: [
     {
       date: Date,

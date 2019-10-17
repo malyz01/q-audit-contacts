@@ -10,11 +10,21 @@ class AuditView extends React.Component {
   render() {
     if (_.isEmpty(data)) {
       return (
-        <div style={{ height: "400px" }}>Please select one from below</div>
+        <div
+          style={{ height: "400px", display: "flex", justifyContent: "center" }}
+        >
+          <div
+            style={{
+              alignSelf: "center"
+            }}
+          >
+            <h3>Please select one from below</h3>
+          </div>
+        </div>
       );
     }
     return (
-      <div>
+      <div style={{ padding: "1rem" }}>
         <h4>Start Date:</h4>
         <div>7-7-7</div>
         <h4>End Date:</h4>

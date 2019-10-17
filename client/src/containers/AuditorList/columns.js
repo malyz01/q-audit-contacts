@@ -51,25 +51,25 @@ export default [
     Header: "NZ - AUDITS DONE",
     columns: [
       {
-        Header: "OA",
+        Header: "Obv",
         id: "nzObserver",
         accessor: d => d.amountOfAudits.nz.observer,
         maxWidth: 85
       },
       {
-        Header: "ITA",
+        Header: "IT",
         id: "nzInTraining",
         accessor: d => d.amountOfAudits.nz.inTraining,
         maxWidth: 85
       },
       {
-        Header: "SA",
+        Header: "Supp",
         id: "nzSupport",
         accessor: d => d.amountOfAudits.nz.support,
         maxWidth: 85
       },
       {
-        Header: "LA",
+        Header: "Lead",
         id: "nzLead",
         accessor: d => d.amountOfAudits.nz.lead,
         maxWidth: 85
@@ -80,25 +80,25 @@ export default [
     Header: "AU - AUDITS DONE",
     columns: [
       {
-        Header: "OA",
+        Header: "Obv",
         id: "auObserver",
         accessor: d => d.amountOfAudits.au.observer,
         maxWidth: 85
       },
       {
-        Header: "ITA",
+        Header: "IT",
         id: "auInTraining",
         accessor: d => d.amountOfAudits.au.inTraining,
         maxWidth: 85
       },
       {
-        Header: "SA",
+        Header: "Supp",
         id: "auSupport",
         accessor: d => d.amountOfAudits.au.support,
         maxWidth: 85
       },
       {
-        Header: "LA",
+        Header: "Lead",
         id: "auLead",
         accessor: d => d.amountOfAudits.au.lead,
         maxWidth: 85
