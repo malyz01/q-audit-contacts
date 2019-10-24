@@ -6,6 +6,8 @@ import Authpage from "../Authpage";
 import Audits from "../Audits";
 import AuditorList from "../AuditorList";
 import AuditDetails from "../AuditorDetails";
+
+import ProviderPage from "../ProviderPage";
 import Calendar from "../Calendar";
 import { AuditorForm } from "../Forms";
 
@@ -18,10 +20,13 @@ class Main extends React.Component {
           <Route path="/login" exact component={Authpage} />
           <Route path="/contacts" exact component={AuditorList} />
           <Route path="/calendar" exact component={Calendar} />
+
           <Route path="/audits" exact component={Audits} />
           <Route path="/auditor/new" exact component={AuditorForm} />
           <Route path="/auditor/:id" exact component={AuditDetails} />
           <Route path="/auditor/:id/edit" exact component={AuditorForm} />
+
+          <Route path="/providers" exact component={ProviderPage} />
 
           {/* <Route
             path="/login"

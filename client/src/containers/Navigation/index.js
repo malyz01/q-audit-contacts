@@ -29,10 +29,17 @@ class Navigation extends React.Component {
         </StyledTypography>
         <StyledTypography
           onClick={this.handleOnClick}
+          to="/providers"
+          variant="h6"
+        >
+          Providers
+        </StyledTypography>
+        <StyledTypography
+          onClick={this.handleOnClick}
           to="/audits"
           variant="h6"
         >
-          Audit
+          Audits
         </StyledTypography>
         <StyledTypography
           onClick={this.handleOnClick}
