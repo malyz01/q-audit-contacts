@@ -9,7 +9,7 @@ const auditSchema = new mongoose.Schema({
     tradingName: String
   },
   standards: [String],
-  auditType: String,
+  auditType: String, // Certification, 1st Surveillance, 2nd Surveillance, Verification
   auditStatus: String,
   auditors: [
     {
