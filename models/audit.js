@@ -1,29 +1,35 @@
 const mongoose = require("mongoose");
 
 const auditSchema = new mongoose.Schema({
-  startDate: Date,
-  endDate: Date,
-  dateStatus: String,
+  isNew: Boolean,
+  isVerification: Boolean,
   provider: {
-    id: { type: mongoose.Schema.Types.ObjectId, ref: "Provider" },
-    tradingName: String
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Provider"
   },
-  standards: [String],
-  auditType: String, // Certification, 1st Surveillance, 2nd Surveillance, Verification
-  auditStatus: String,
   auditors: [
     {
       id: { type: mongoose.Schema.Types.ObjectId, ref: "Auditor" },
-      name: String,
+      dateAssigned: Date,
       type: String //Lead, Observer, Support, In training, Peer Review
     }
   ],
-  location: String,
-  country: String,
-  progress: { type: mongoose.Schema.Types.ObjectId, ref: "Progress" },
-  deadlineSubmission: Date,
-  submittedOn: Date,
-  approvedByCommission: Date,
+  data: {
+    startDate: Date,
+    endDate: Date,
+    dateStatus: String,
+    standards: [String],
+    auditType: String, // Certification, 1st Surveillance, 2nd Surveillance, Verification
+    auditStatus: String,
+    location: String,
+    country: String,
+    deadlineSubmission: Date,
+    submittedOn: Date,
+    approvedByCommission: Date
+  },
+  progress: {
+    verification: { type: mongoose.Schema.Types.ObjectId, ref: "Verification" }
+  },
   comments: [
     {
       date: Date,

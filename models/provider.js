@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const providerSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now() },
   withAppRef: Boolean,
+  isAppRefLinked: Boolean,
   data: {
     legalName: String,
     tradingName: String,

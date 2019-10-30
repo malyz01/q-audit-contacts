@@ -9,7 +9,7 @@ import AuditDetails from "../AuditorDetails";
 
 import ProviderPage from "../ProviderPage";
 import Calendar from "../Calendar";
-import { AuditorForm } from "../Forms";
+import { AuditorForm, ProviderForm } from "../Forms";
 
 class Main extends React.Component {
   render() {
@@ -27,6 +27,7 @@ class Main extends React.Component {
           <Route path="/auditor/:id/edit" exact component={AuditorForm} />
 
           <Route path="/providers" exact component={ProviderPage} />
+          <Route path="/providers/create" exact component={ProviderForm} />
 
           {/* <Route
             path="/login"
