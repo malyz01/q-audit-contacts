@@ -19,10 +19,10 @@ mongoose
     useUnifiedTopology: true
   })
   .catch(error => {
-    app.use((req, res, next) => {
+    app.use((err, req, res, next) => {
       return next({
         status: 400,
-        message: error
+        message: error.message
       });
     });
   });
@@ -51,5 +51,5 @@ if (port == null || port == "") {
 }
 
 app.listen(port, function() {
-  console.log("Server has started");
+  console.log(`Server has started: ${port}`);
 });
