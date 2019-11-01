@@ -1,8 +1,7 @@
 import React from "react";
-
 import { Container, Paper, Grid, Box } from "@material-ui/core";
 
-import Inputs from "./Inputs";
+import { FirstColumn, SecondColumn } from "./Content";
 
 class index extends React.Component {
   render() {
@@ -13,11 +12,13 @@ class index extends React.Component {
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <Box height="600px">
-                  <Inputs />
+                  <FirstColumn />
                 </Box>
               </Grid>
               <Grid item xs={6}>
-                <Box height="600px">2nd Column</Box>
+                <Box height="600px">
+                  <SecondColumn />
+                </Box>
               </Grid>
             </Grid>
           </Paper>
