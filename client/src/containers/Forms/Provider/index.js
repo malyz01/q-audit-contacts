@@ -1,27 +1,29 @@
 import React from "react";
-import { Container, Paper, Grid, Box } from "@material-ui/core";
+import { Container, Grid, Box } from "@material-ui/core";
 
-import { FirstColumn, SecondColumn } from "./Content";
+import Content from "./Content";
 
 class index extends React.Component {
   render() {
     return (
       <Container maxWidth="lg">
         <Box my={5}>
-          <Paper>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <Box height="600px">
-                  <FirstColumn />
-                </Box>
-              </Grid>
-              <Grid item xs={6}>
-                <Box height="600px">
-                  <SecondColumn />
-                </Box>
-              </Grid>
+          <Grid container>
+            <Grid item xs={12}>
+              <Box
+                fontSize="h5.fontSize"
+                display="flex"
+                justifyContent="center"
+                mt="1.5rem"
+              >
+                Enter New Provider
+              </Box>
+              <Box mx="auto" pt="1.5rem" maxWidth="600px" height="600px">
+                <Content />
+              </Box>
+              <Box display="flex" justifyContent="center" mt="1.5rem"></Box>
             </Grid>
-          </Paper>
+          </Grid>
         </Box>
       </Container>
     );

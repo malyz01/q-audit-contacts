@@ -9,6 +9,9 @@ const providerSchema = new mongoose.Schema({
     tradingName: String,
     applicationRefNumber: String,
     registrationNumber: String,
+    contactPerson: String,
+    contactEmail: String,
+    contactMobile: String,
     location: String,
     country: String
   },

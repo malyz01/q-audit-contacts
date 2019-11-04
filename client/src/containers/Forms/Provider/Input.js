@@ -6,13 +6,12 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import styled from "@material-ui/styles/styled";
 
 const InputContainer = styled(FormControl)({
-  margin: "0.5rem 1rem",
-  width: "95%"
+  margin: "0.5rem 1rem"
 });
 
 const Input = ({ handleChange, values, name, label, lw }) => {
   return (
-    <InputContainer variant="outlined">
+    <InputContainer fullWidth variant="outlined">
       <InputLabel htmlFor={name}>{label}</InputLabel>
       <OutlinedInput
         id={name}
