@@ -2,18 +2,17 @@ const mongoose = require("mongoose");
 
 const providerSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now() },
-  withAppRef: Boolean,
   isAppRefLinked: Boolean,
   data: {
-    legalName: String,
-    tradingName: String,
-    applicationRefNumber: String,
-    registrationNumber: String,
-    contactPerson: String,
-    contactEmail: String,
-    contactMobile: String,
-    location: String,
-    country: String
+    legalName: { type: String, default: "" },
+    tradingName: { type: String, default: "" },
+    applicationRefNumber: { type: String, default: "" },
+    registrationNumber: { type: String, default: "" },
+    contactPerson: { type: String, default: "" },
+    contactEmail: { type: String, default: "" },
+    contactMobile: { type: String, default: "" },
+    location: { type: String, default: "" },
+    country: { type: String, default: "" }
   },
   audits: [{ type: mongoose.Schema.Types.ObjectId, ref: "Audit" }]
 });

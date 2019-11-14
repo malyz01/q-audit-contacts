@@ -9,12 +9,13 @@ const auditSchema = new mongoose.Schema({
   },
   auditors: [
     {
-      id: { type: mongoose.Schema.Types.ObjectId, ref: "Auditor" },
+      auditor: { type: mongoose.Schema.Types.ObjectId, ref: "Auditor" },
       dateAssigned: Date,
       type: String //Lead, Observer, Support, In training, Peer Review
     }
   ],
   data: {
+    proposalSignedDate: Date,
     startDate: Date,
     endDate: Date,
     dateStatus: String,
@@ -27,9 +28,7 @@ const auditSchema = new mongoose.Schema({
     submittedOn: Date,
     approvedByCommission: Date
   },
-  progress: {
-    verification: { type: mongoose.Schema.Types.ObjectId, ref: "Verification" }
-  },
+  progress: { type: mongoose.Schema.Types.ObjectId, ref: "Progress" },
   comments: [
     {
       date: Date,
