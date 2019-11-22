@@ -14,6 +14,7 @@ const progressSchema = new mongoose.Schema({
       },
       employees: [
         {
+          _id: false,
           name: String,
           insurance: { type: Boolean, default: false },
           id70: { type: Boolean, default: false },
