@@ -2,19 +2,25 @@ const mongoose = require("mongoose");
 
 const providerSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now() },
-  isAppRefLinked: Boolean,
+  isLinked: Boolean,
+  isNew: Boolean,
   data: {
     legalName: { type: String, default: "" },
     tradingName: { type: String, default: "" },
     applicationRefNumber: { type: String, default: "" },
     registrationNumber: { type: String, default: "" },
-    contactPerson: { type: String, default: "" },
-    contactEmail: { type: String, default: "" },
-    contactMobile: { type: String, default: "" },
+    contacts: [
+      {
+        _id: false,
+        name: String,
+        email: String,
+        mobile: String
+      }
+    ],
     location: { type: String, default: "" },
     country: { type: String, default: "" }
   },
-  audits: [{ type: mongoose.Schema.Types.ObjectId, ref: "Audit" }]
+  audits: [{ _id: false, type: mongoose.Schema.Types.ObjectId, ref: "Audit" }]
 });
 
 module.exports = mongoose.model("Provider", providerSchema);

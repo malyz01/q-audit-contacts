@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
 
 const auditSchema = new mongoose.Schema({
-  isNew: Boolean,
-  isVerification: Boolean,
   provider: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Provider"
   },
   auditors: [
     {
+      _id: false,
       auditor: { type: mongoose.Schema.Types.ObjectId, ref: "Auditor" },
       dateAssigned: Date,
       type: String //Lead, Observer, Support, In training, Peer Review
@@ -19,9 +18,9 @@ const auditSchema = new mongoose.Schema({
     startDate: Date,
     endDate: Date,
     dateStatus: String,
-    standards: [String],
-    auditType: String, // Certification, 1st Surveillance, 2nd Surveillance, Verification
-    auditStatus: String,
+    standards: [{ _id: false, type: String }], //NDIS, ISO, ACIS2018
+    auditType: String, // Certification, 1st Surveillance, 2nd Surveillance, Maintenance, Verification
+    auditStatus: String, //Pending, In Progress, Recommended, STC, Completed, Cancelled
     location: String,
     country: String,
     deadlineSubmission: Date,

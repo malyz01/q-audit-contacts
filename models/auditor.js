@@ -25,6 +25,7 @@ const auditorSchema = new mongoose.Schema({
   },
   audits: [
     {
+      _id: false,
       audit: { type: mongoose.Schema.Types.ObjectId, ref: "Audit" },
       evaluation: {
         date: Date,

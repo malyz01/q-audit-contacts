@@ -1,18 +1,22 @@
 import React from "react";
-import { Container, Button } from "@material-ui/core";
-import { styled } from "@material-ui/core/styles";
-
-const AcceptBtn = styled(Button)({
-  backgroundColor: "red"
-});
+import { Container, Button, Box } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import Table from "./Table";
 
 class index extends React.Component {
   render() {
     return (
       <Container>
-        <AcceptBtn variant="contained">Try</AcceptBtn>
+        <Box pt={2}>
+          <Button variant="contained">
+            <AddIcon /> PROVIDER
+          </Button>
 
-        <h3>Provider details</h3>
+          <Box mt={3} fontSize="h5.fontSize">
+            Provider Lists:
+          </Box>
+          <Table />
+        </Box>
       </Container>
     );
   }
