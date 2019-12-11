@@ -17,7 +17,8 @@ const providerSchema = new mongoose.Schema({
         mobile: String
       }
     ],
-    location: { type: String, default: "" },
+    headOffice: { type: String, default: "" },
+    outlets: [],
     country: { type: String, default: "" }
   },
   audits: [{ _id: false, type: mongoose.Schema.Types.ObjectId, ref: "Audit" }]

@@ -4,39 +4,36 @@ import MaterialTable from "material-table";
 export default function MaterialTableDemo() {
   const [state, setState] = React.useState({
     columns: [
-      { title: "Legal Name", field: "legalName" },
       { title: "Trading Name", field: "tradingName" },
-      { title: "Application Ref Number", field: "applicationRefNumber" },
-      {
-        title: "Registration Number",
-        field: "registrationNumber"
-      },
-      { title: "Head Office", field: "headOffice" },
-      { title: "Country", field: "country" }
+      { title: "Standards", field: "standards" },
+      { title: "Audit Type", field: "auditType" },
+      { title: "Audit Status", field: "auditStatus" }
     ],
     data: [
       {
-        legalName: "Mehmet",
-        tradingName: "Baran",
-        applicationRefNumber: "A-SDAS",
-        registrationNumber: "ASDQW",
-        headOffice: "",
-        country: ""
+        tradingName: "Timothy Glanvill",
+        standards: "NDIS",
+        auditType: "Verification",
+        auditStatus: "Recommended"
       },
       {
-        legalName: "Second",
-        tradingName: "Provider",
-        applicationRefNumber: "A-SDAS",
-        registrationNumber: "ASDQW",
-        headOffice: "",
-        country: ""
+        tradingName: "THE DISABILITY PHYSIO",
+        standards: "NDIS",
+        auditType: "Verification",
+        auditStatus: "Recommended"
+      },
+      {
+        tradingName: "DAR ALSALAM CARE",
+        standards: "NDIS",
+        auditType: "Verification",
+        auditStatus: "In Progress"
       }
     ]
   });
 
   return (
     <MaterialTable
-      title="Provider List"
+      title="Audit List"
       columns={state.columns}
       data={state.data}
       editable={{

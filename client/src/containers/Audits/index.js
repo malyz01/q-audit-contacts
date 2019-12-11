@@ -1,8 +1,16 @@
 import React from "react";
+import { Container, Box } from "@material-ui/core";
+import Table from "./Table";
 
 class index extends React.Component {
   render() {
-    return <h1>This page is for Audit Details</h1>;
+    return (
+      <Container>
+        <Box mt={2}>
+          <Table />
+        </Box>
+      </Container>
+    );
   }
 }
 

@@ -146,7 +146,8 @@ class AuditorForm extends React.Component {
               "Lead-Non-Clinical",
               "Support-Clinical",
               "Support-Non-Clinincal",
-              "Support/Consumer"
+              "Support/Consumer",
+              "Consultant"
             ]}
           />
         </div>
@@ -254,7 +255,6 @@ const mapStateToProps = state => ({
   auditor: state.auditor.selected
 });
 
-export default connect(
-  mapStateToProps,
-  { ...auditor }
-)(withRouter(AuditorForm));
+export default connect(mapStateToProps, { ...auditor })(
+  withRouter(AuditorForm)
+);
