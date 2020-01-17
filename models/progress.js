@@ -30,7 +30,8 @@ const progressSchema = new mongoose.Schema({
     followUpClient: String, //date
     clientLastReponse: String //date
   },
-  certification: {}
+  certification: {},
+  maintenance: {}
 });
 
 module.exports = mongoose.Model("Progress", progressSchema);
