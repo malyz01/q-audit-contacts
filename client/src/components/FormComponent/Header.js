@@ -7,8 +7,7 @@ export default props => (
     style={{
       display: "flex",
       flexDirection: "column",
-      alignItems: "center",
-      marginTop: "2rem"
+      alignItems: "center"
     }}
   >
     <div style={{ width: "200px", marginBottom: "1rem" }}>

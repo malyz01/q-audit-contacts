@@ -10,7 +10,7 @@ import { Grow } from "@material-ui/core";
 // import { genData } from "../../helpers";
 import Loader from "../../components/Loader";
 import Buttons from "./Buttons";
-import { FabAdd, Header } from "../../components/FormComponent";
+import { FabAdd } from "../../components/FormComponent";
 import columns from "./columns";
 import { auditor } from "../../store/actions";
 
@@ -128,7 +128,6 @@ export class Main extends Component {
         className="contactContainer"
       >
         <div onClick={e => e.stopPropagation()}>
-          <Header />
           {this.renderButtons()}
           {this.renderTable()}
         </div>
@@ -142,7 +141,4 @@ const mapStateToProps = state => ({
   selected: state.auditor.selected
 });
 
-export default connect(
-  mapStateToProps,
-  { ...auditor }
-)(withRouter(Main));
+export default connect(mapStateToProps, { ...auditor })(withRouter(Main));

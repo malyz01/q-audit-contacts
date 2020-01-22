@@ -6,15 +6,16 @@ import Authpage from "../Authpage";
 import Audits from "../Audits";
 import AuditorList from "../AuditorList";
 import AuditDetails from "../AuditorDetails";
-
 import ProviderPage from "../ProviderPage";
 import Calendar from "../Calendar";
+import { Header } from "../../components/FormComponent";
 import { AuditorForm, ProviderForm } from "../Forms";
 
 class Main extends React.Component {
   render() {
     return (
       <div>
+        <Header />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Authpage} />
