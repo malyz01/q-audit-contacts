@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 
-import { auditor } from "../../store/actions";
+import { auditor } from "../../../store/actions";
 
 const data = {};
 
@@ -38,7 +38,4 @@ const mapStateToProps = state => ({
   selected: state.auditor.selected
 });
 
-export default connect(
-  mapStateToProps,
-  { ...auditor }
-)(AuditView);
+export default connect(mapStateToProps, { ...auditor })(AuditView);

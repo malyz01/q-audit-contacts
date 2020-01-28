@@ -18,7 +18,7 @@ const auditSchema = new mongoose.Schema({
     startDate: Date,
     endDate: Date,
     dateStatus: String,
-    standards: [{ _id: false, type: String }], //NDIS, ISO, ACIS2018
+    standards: [{ _id: false, type: String }], //NDIS, ISO, ACIS2018, ISO 9000
     auditType: String, // Certification, 1st Surveillance, 2nd Surveillance, Maintenance, Verification
     auditStatus: String, //Pending, In Progress, Recommended, STC, Completed, Cancelled
     location: String,

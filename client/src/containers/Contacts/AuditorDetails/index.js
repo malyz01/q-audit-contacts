@@ -4,10 +4,10 @@ import _ from "lodash";
 
 import { Container, Grid, Box, Paper } from "@material-ui/core";
 
-import Loader from "../../components/Loader";
+import Loader from "../../../components/Loader";
 import AuditView from "./AuditView";
 import AuditsDone from "./AuditsDone";
-import { auditor } from "../../store/actions";
+import { auditor } from "../../../store/actions";
 
 const pending = {
   type: "Pending"
@@ -61,7 +61,4 @@ const mapStateToProps = state => ({
   auditor: state.auditor.selected
 });
 
-export default connect(
-  mapStateToProps,
-  { ...auditor }
-)(index);
+export default connect(mapStateToProps, { ...auditor })(index);

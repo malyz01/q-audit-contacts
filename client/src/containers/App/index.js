@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import Main from "./containers/Main";
-import Navigation from "./containers/Navigation";
+import Pages from "./pages";
+import Navigation from "./Navigation";
 
 function App() {
   return (
     <BrowserRouter>
       <Navigation />
-      <Main />
+      <Pages />
     </BrowserRouter>
   );
 }
