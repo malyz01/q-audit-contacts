@@ -14,18 +14,18 @@ const auditSchema = new mongoose.Schema({
     }
   ],
   data: {
-    proposalSignedDate: Date,
-    startDate: Date,
-    endDate: Date,
-    dateStatus: String,
+    proposalSignedDate: { type: Date, default: "" },
+    startDate: { type: Date, default: "" },
+    endDate: { type: Date, default: "" },
+    dateStatus: { type: String, default: "" },
     standards: [{ _id: false, type: String }], //NDIS, ISO, ACIS2018, ISO 9000
-    auditType: String, // Certification, 1st Surveillance, 2nd Surveillance, Maintenance, Verification
-    auditStatus: String, //Pending, In Progress, Recommended, STC, Completed, Cancelled
-    location: String,
-    country: String,
-    deadlineSubmission: Date,
-    submittedOn: Date,
-    approvedByCommission: Date
+    auditType: { type: String, default: "" }, // Certification, 1st Surveillance, 2nd Surveillance, Maintenance, Verification
+    auditStatus: { type: String, default: "" }, //Pending, In Progress, Recommended, STC, Completed, Cancelled
+    location: { type: String, default: "" },
+    country: { type: String, default: "" },
+    deadlineSubmission: { type: Date, default: "" },
+    submittedOn: { type: Date, default: "" },
+    approvedByCommission: { type: Date, default: "" }
   },
   progress: { type: mongoose.Schema.Types.ObjectId, ref: "Progress" },
   comments: [

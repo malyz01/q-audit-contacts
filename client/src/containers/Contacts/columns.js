@@ -29,7 +29,9 @@ export default [
     accessor: "mobile",
     Cell: ({ value }) => (
       <div style={{ textAlign: "center" }}>
-        <div>{value[0]}</div>
+        <div style={{ cursor: "pointer" }} onClick={() => alert("clicked")}>
+          {value[0]}
+        </div>
         <div>{value[1]}</div>
       </div>
     )
