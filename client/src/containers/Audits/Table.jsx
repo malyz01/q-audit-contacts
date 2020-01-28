@@ -1,5 +1,7 @@
 import React from "react";
 import MaterialTable from "material-table";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { FabNew } from "../../components/FormComponent";
 
 export default function MaterialTableDemo() {

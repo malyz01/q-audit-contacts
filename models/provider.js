@@ -18,6 +18,7 @@ const providerSchema = new mongoose.Schema({
       }
     ],
     headOffice: { type: String, default: "" },
+    auditAddress: { type: String, default: "" },
     outlets: [],
     country: { type: String, default: "" }
   },
