@@ -3,6 +3,7 @@ import TextField from "./TextField";
 import Select from "./Select";
 import Header from "./Header";
 import FabAdd from "./FabAdd";
+import FabNew from "./FabNew";
 import FabView from "./FabView";
 import FabEdit from "./FabEdit";
 import FabDel from "./FabDel";
@@ -13,6 +14,7 @@ export {
   TextField,
   Select,
   Header,
+  FabNew,
   FabAdd,
   FabView,
   FabEdit,

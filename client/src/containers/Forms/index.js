@@ -1,4 +1,4 @@
-import AuditorForm from "./AuditorForm";
+import AuditorForm from "./Auditor";
 import LoginForm from "./LoginForm";
 import ProviderForm from "./Provider";
 

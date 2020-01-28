@@ -7,7 +7,7 @@ import reduxThunk from "redux-thunk";
 import "./index.css";
 import "react-table/react-table.css";
 
-import App from "./containers/App";
+import App from "./App";
 import reducers from "./store/reducers";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

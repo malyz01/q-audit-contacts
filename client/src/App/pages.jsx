@@ -1,15 +1,14 @@
 import React from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 
-import Home from "../Homepage";
-import Authpage from "../Authpage";
-import Audits from "../Audits";
-import Contacts from "../Contacts";
-import AuditorDetails from "../Contacts/AuditorDetails";
-import ProviderPage from "../ProviderPage";
-
-import { Header } from "../../components/FormComponent";
-import { AuditorForm, ProviderForm } from "../Forms";
+import Home from "../containers/Homepage";
+import Authpage from "../containers/Authpage";
+import Audits from "../containers/Audits";
+import Contacts from "../containers/Contacts";
+import AuditorDetails from "../containers/Contacts/AuditorDetails";
+import ProviderPage from "../containers/ProviderPage";
+import { Header } from "../components/FormComponent";
+import { AuditorForm, ProviderForm } from "../containers/Forms";
 
 class Main extends React.Component {
   render() {
@@ -27,7 +26,7 @@ class Main extends React.Component {
           <Route path="/audits" exact component={Audits} />
 
           <Route path="/providers" exact component={ProviderPage} />
-          <Route path="/providers/create" exact component={ProviderForm} />
+          <Route path="/providers/new" exact component={ProviderForm} />
 
           {/* <Route
             path="/login"

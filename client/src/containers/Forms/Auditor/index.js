@@ -2,19 +2,13 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import _ from "lodash";
-
 import { Grid, FormControl, Paper } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
 
-import { ISAuditorForm } from "./InitialState";
-import {
-  TextField,
-  Select,
-  Header,
-  Button
-} from "../../components/FormComponent";
-import Loader from "../../components/Loader";
-import { auditor } from "../../store/actions";
+import { ISAuditorForm } from "../InitialState";
+import { TextField, Select, Button } from "../../../components/FormComponent";
+import Loader from "../../../components/Loader";
+import { auditor } from "../../../store/actions";
 
 const MainContainer = styled(Paper)({
   width: "450px",
@@ -237,7 +231,6 @@ class AuditorForm extends React.Component {
                 flexDirection: "column"
               }}
             >
-              <Header />
               {this.renderInput()}
               {this.renderSelect()}
               {this.renderOptional("nz")}
