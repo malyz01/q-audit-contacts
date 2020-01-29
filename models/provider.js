@@ -5,21 +5,26 @@ const providerSchema = new mongoose.Schema({
   isLinked: Boolean,
   isNew: Boolean,
   data: {
-    legalName: { type: String, default: "" },
-    tradingName: { type: String, default: "" },
-    applicationRefNumber: { type: String, default: "" },
-    registrationNumber: { type: String, default: "" },
+    legalName: { type: String, required: true },
+    tradingName: { type: String, required: true },
+    abn: { type: String, required: true },
+    acn: { type: String, default: "" },
     contacts: [
       {
         _id: false,
         name: String,
-        email: String,
-        mobile: String
+        email: { type: String, unique: true, required: true },
+        mobile: { type: String, unique: true, required: true }
       }
     ],
     headOffice: { type: String, default: "" },
-    auditAddress: { type: String, default: "" },
-    outlets: [],
+    outlets: [
+      {
+        name: { type: String, default: "" },
+        address: { type: String, default: "" }
+      }
+    ],
+    state: { type: String, default: "" },
     country: { type: String, default: "" }
   },
   audits: [{ _id: false, type: mongoose.Schema.Types.ObjectId, ref: "Audit" }]

@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Field, FieldArray, reduxForm } from "redux-form";
 import validate from "./validate";
+import Paper from "@material-ui/core/Paper";
+import InputLabel from "@material-ui/core/InputLabel";
+import Input from "@material-ui/core/Input";
+import { CustomSelect } from "../../../components/FormComponent";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import styled from "@material-ui/core/styles/styled";
+import "./index.css";
 
-import Input from "./Input";
+import CustomInput from "./Input";
 
 const content = [
   { name: "legalName", label: "Legal Name", lw: 88 },
@@ -22,6 +27,15 @@ const content = [
 
 const BtnContainer = styled(ButtonGroup)({
   margin: ".5rem 1rem 1rem"
+});
+
+const StyledBtn = styled(Button)({
+  marginLeft: "10px"
+});
+
+const StyledPaper = styled(Paper)({
+  margin: "2rem",
+  padding: "1rem"
 });
 
 export const Content = () => {
@@ -45,7 +59,7 @@ export const Content = () => {
   return (
     <form autoComplete="off">
       {content.map(data => (
-        <Input
+        <CustomInput
           {...data}
           key={data.name}
           values={values[data.name]}
@@ -62,94 +76,127 @@ export const Content = () => {
   );
 };
 
+// ===================================================================
+// ==========================REDUX FORM===============================
+// ===================================================================
+
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div>
-    <label>{label}</label>
+  <div style={{ marginBottom: "1rem" }}>
+    <InputLabel>{label}</InputLabel>
     <div>
-      <input {...input} type={type} placeholder={label} />
+      <Input fullWidth {...input} type={type} />
       {touched && error && <span>{error}</span>}
     </div>
   </div>
 );
 
-const renderHobbies = ({ fields, meta: { error } }) => (
+const renderContacts = ({ fields, meta: { error, submitFailed } }) => (
   <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>
-        Add Hobby
-      </button>
-    </li>
-    {fields.map((hobby, index) => (
+    {fields.map((contacts, index) => (
       <li key={index}>
-        <button
-          type="button"
-          title="Remove Hobby"
-          onClick={() => fields.remove(index)}
-        />
+        <h4>Contact #{index + 1}</h4>
         <Field
-          name={hobby}
+          name={`${contacts}.name`}
           type="text"
           component={renderField}
-          label={`Hobby #${index + 1}`}
+          label="Full name"
         />
+        <Field
+          name={`${contacts}.email`}
+          type="text"
+          component={renderField}
+          label="Email"
+        />
+        <Field
+          name={`${contacts}.mobile`}
+          type="text"
+          component={renderField}
+          label="Mobile"
+        />
+        {fields.length > 1 && (
+          <StyledBtn
+            variant="outlined"
+            type="button"
+            title="Remove"
+            color="secondary"
+            onClick={() => fields.remove(index)}
+          >
+            Remove
+          </StyledBtn>
+        )}
       </li>
     ))}
-    {error && <li className="error">{error}</li>}
-  </ul>
-);
-
-const renderMembers = ({ fields, meta: { error, submitFailed } }) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push({})}>
-        Add Member
-      </button>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "flex-end",
+        paddingTop: ".5rem"
+      }}
+    >
+      <StyledBtn
+        variant="outlined"
+        type="button"
+        onClick={() => fields.push({})}
+      >
+        Add Contact
+      </StyledBtn>
       {submitFailed && error && <span>{error}</span>}
-    </li>
-    {fields.map((member, index) => (
-      <li key={index}>
-        <button
-          type="button"
-          title="Remove Member"
-          onClick={() => fields.remove(index)}
-        />
-        <h4>Member #{index + 1}</h4>
-        <Field
-          name={`${member}.firstName`}
-          type="text"
-          component={renderField}
-          label="First Name"
-        />
-        <Field
-          name={`${member}.lastName`}
-          type="text"
-          component={renderField}
-          label="Last Name"
-        />
-        <FieldArray name={`${member}.hobbies`} component={renderHobbies} />
-      </li>
-    ))}
+    </div>
   </ul>
 );
 
 const FieldArraysForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props;
+
+  const handleOnSubmit = values => {
+    console.log(values);
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(handleOnSubmit)}>
       <Field
-        name="clubName"
+        name="legalName"
         type="text"
         component={renderField}
-        label="Club Name"
+        label="Legal Name"
       />
-      <FieldArray name="members" component={renderMembers} />
-      <div>
-        <button type="submit" disabled={submitting}>
+      <Field
+        name="tradingName"
+        type="text"
+        component={renderField}
+        label="Trading Name"
+      />
+      <Field name="abn" type="text" component={renderField} label="ABN" />
+      <Field name="acn" type="text" component={renderField} label="ACN" />
+      <StyledPaper>
+        <FieldArray name="contacts" component={renderContacts} />
+      </StyledPaper>
+      <Field
+        name="headOffice"
+        type="text"
+        component={renderField}
+        label="Head Office"
+      />
+      <Field name="state" type="text" component={renderField} label="State" />
+      <Field
+        name="country"
+        type="text"
+        data={["New Zealand", "Australia"]}
+        component={CustomSelect}
+        label="Country"
+      />
+      <div style={{ marginBottom: "1rem" }}>
+        <StyledBtn variant="outlined" type="submit" disabled={submitting}>
           Submit
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
+        </StyledBtn>
+        <StyledBtn
+          variant="outlined"
+          type="button"
+          disabled={pristine || submitting}
+          onClick={reset}
+        >
           Clear Values
-        </button>
+        </StyledBtn>
       </div>
     </form>
   );
@@ -157,5 +204,8 @@ const FieldArraysForm = props => {
 
 export default reduxForm({
   form: "fieldArrays", // a unique identifier for this form
-  validate
+  validate,
+  initialValues: {
+    contacts: [{ name: "", email: "", mobile: "" }]
+  }
 })(FieldArraysForm);

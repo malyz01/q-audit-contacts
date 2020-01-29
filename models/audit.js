@@ -19,9 +19,17 @@ const auditSchema = new mongoose.Schema({
     endDate: { type: Date, default: "" },
     dateStatus: { type: String, default: "" },
     standards: [{ _id: false, type: String }], //NDIS, ISO, ACIS2018, ISO 9000
+    applicationRefNumber: { type: String, default: "" },
+    applicationId: { type: String, default: "" },
     auditType: { type: String, default: "" }, // Certification, 1st Surveillance, 2nd Surveillance, Maintenance, Verification
     auditStatus: { type: String, default: "" }, //Pending, In Progress, Recommended, STC, Completed, Cancelled
-    location: { type: String, default: "" },
+    auditAddress: { type: String, default: "" },
+    outlets: [
+      {
+        name: { type: String, default: "" },
+        address: { type: String, default: "" }
+      }
+    ],
     country: { type: String, default: "" },
     deadlineSubmission: { type: Date, default: "" },
     submittedOn: { type: Date, default: "" },
