@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 
 const providerSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now() },
-  isLinked: Boolean,
-  isNew: Boolean,
   data: {
     legalName: { type: String, required: true },
     tradingName: { type: String, required: true },
@@ -20,7 +18,7 @@ const providerSchema = new mongoose.Schema({
     headOffice: { type: String, default: "" },
     outlets: [
       {
-        name: { type: String, default: "" },
+        branchName: { type: String, default: "" },
         address: { type: String, default: "" }
       }
     ],

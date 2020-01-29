@@ -28,6 +28,7 @@ mongoose
   });
 
 app.use("/api/auditor", require("./routes/auditor"));
+app.use("/api/provider", require("./routes/provider"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

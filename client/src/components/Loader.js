@@ -36,16 +36,6 @@ export default function CircularIndeterminate() {
           thickness={7}
           className={classes.progress}
         />
-        <CircularProgress
-          size={20}
-          thickness={7}
-          className={classes.progress}
-        />
-        <CircularProgress
-          size={20}
-          thickness={7}
-          className={classes.progress}
-        />
       </div>
     </div>
   );

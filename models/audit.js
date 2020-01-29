@@ -14,28 +14,20 @@ const auditSchema = new mongoose.Schema({
     }
   ],
   data: {
-    proposalSignedDate: { type: Date, default: "" },
     startDate: { type: Date, default: "" },
     endDate: { type: Date, default: "" },
-    dateStatus: { type: String, default: "" },
+    dateStatus: { type: String, default: "" }, //Proposed, Tentative, Confirmed
     standards: [{ _id: false, type: String }], //NDIS, ISO, ACIS2018, ISO 9000
-    applicationRefNumber: { type: String, default: "" },
-    applicationId: { type: String, default: "" },
-    auditType: { type: String, default: "" }, // Certification, 1st Surveillance, 2nd Surveillance, Maintenance, Verification
-    auditStatus: { type: String, default: "" }, //Pending, In Progress, Recommended, STC, Completed, Cancelled
-    auditAddress: { type: String, default: "" },
-    outlets: [
-      {
-        name: { type: String, default: "" },
-        address: { type: String, default: "" }
-      }
+    // alternate - ndis: { type: mongoose.Schema.Types.ObjectId, ref: "NDIS" },
+    standardDetails: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "NDIS" },
+      { type: mongoose.Schema.Types.ObjectId, ref: "ACIS2018" },
+      { type: mongoose.Schema.Types.ObjectId, ref: "HSQF" },
+      { type: mongoose.Schema.Types.ObjectId, ref: "ISO9000" }
     ],
-    country: { type: String, default: "" },
-    deadlineSubmission: { type: Date, default: "" },
-    submittedOn: { type: Date, default: "" },
-    approvedByCommission: { type: Date, default: "" }
+    auditAddress: { type: String, default: "" },
+    country: { type: String, default: "" }
   },
-  progress: { type: mongoose.Schema.Types.ObjectId, ref: "Progress" },
   comments: [
     {
       date: Date,

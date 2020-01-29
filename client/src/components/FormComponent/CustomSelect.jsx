@@ -22,7 +22,9 @@ export default ({ input, label, data, type, meta: { touched, error } }) => {
           type={type}
         >
           {data.map(d => (
-            <MenuItem value={d}>{d}</MenuItem>
+            <MenuItem key={d} value={d}>
+              {d}
+            </MenuItem>
           ))}
         </Select>
         {touched && error && <span>{error}</span>}
