@@ -8,7 +8,6 @@ export default ({ input, label, data, type, meta: { touched, error } }) => {
 
   const handleChange = e => {
     setValue(e.target.value);
-    console.log(value);
   };
 
   return (
