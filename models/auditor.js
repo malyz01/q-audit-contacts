@@ -42,7 +42,8 @@ const auditorSchema = new mongoose.Schema({
   notes: [
     {
       date: Date,
-      message: String
+      message: String,
+      user: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
     }
   ],
   accessToken: String,

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { FabNew } from "../../components/FormComponent";
 
-export default function MaterialTableDemo() {
+const Audit = ({ history }) => {
   const [state, setState] = React.useState({
     columns: [
       { title: "Trading Name", field: "tradingName" },
@@ -35,7 +35,7 @@ export default function MaterialTableDemo() {
   });
 
   const handleOnClick = () => {
-    alert("click new in audit");
+    history.push(`/audits/new`);
   };
 
   return (
@@ -85,4 +85,10 @@ export default function MaterialTableDemo() {
       />
     </div>
   );
-}
+};
+
+const mapStateToProps = state => ({
+  audits: state
+});
+
+export default connect(mapStateToProps)(withRouter(Audit));

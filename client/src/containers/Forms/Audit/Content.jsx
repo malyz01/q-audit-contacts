@@ -1,13 +1,11 @@
 import React from "react";
-import { Field, FieldArray, reduxForm } from "redux-form";
-import validate from "./validate";
+import { Field, reduxForm } from "redux-form";
 import "./index.css";
 
-import { renderContacts, renderOutlets } from "./Fields";
-import { StyledBtn, renderField } from "../FormComponents";
+import { StyledBtn, renderField, DatePickers } from "../FormComponents";
 import { CustomSelect } from "../../../components/FormComponent";
 
-const ProviderForm = props => {
+const AuditForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props;
 
   const handleOnSubmit = values => {
@@ -17,36 +15,44 @@ const ProviderForm = props => {
   return (
     <form onSubmit={handleSubmit(handleOnSubmit)}>
       <Field
-        name="legalName"
-        type="text"
-        component={renderField}
-        label="Legal Name"
-      />
-      <Field
-        name="tradingName"
-        type="text"
-        component={renderField}
-        label="Trading Name"
-      />
-      <Field name="abn" type="text" component={renderField} label="ABN" />
-      <Field name="acn" type="text" component={renderField} label="ACN" />
-      <Field
         name="country"
         type="text"
         data={["Australia", "New Zealand"]}
         component={CustomSelect}
         label="Country"
       />
-      <Field name="state" type="text" component={renderField} label="State" />
       <Field
-        name="headOffice"
+        name="startDate"
+        type="text"
+        component={DatePickers}
+        label="Start Date"
+      />
+      <Field
+        name="endDate"
+        type="text"
+        component={DatePickers}
+        label="End Date"
+      />
+      <Field
+        name="dateStatus"
+        type="text"
+        data={["Proposed", "Tentative", "Confirmed"]}
+        component={CustomSelect}
+        label="Status of Date"
+      />
+      <Field
+        name="auditAddress"
         type="text"
         component={renderField}
-        label="Head Office"
+        label="Audit Address"
       />
-      <FieldArray name="outlets" component={renderOutlets} />
-      <FieldArray name="contacts" component={renderContacts} />
-
+      <Field
+        name="standards"
+        type="text"
+        data={["NDIS", "ACIS2018", "HSQF", "ISO9000"]}
+        component={CustomSelect}
+        label="Standards"
+      />
       <div
         style={{
           marginBottom: "1rem",
@@ -76,9 +82,5 @@ const ProviderForm = props => {
 };
 
 export default reduxForm({
-  form: "fprovider", // a unique identifier for this form
-  validate,
-  initialValues: {
-    contacts: [{ name: "", email: "", mobile: "" }]
-  }
-})(ProviderForm);
+  form: "faudit" // a unique identifier for this form
+})(AuditForm);
