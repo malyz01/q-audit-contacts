@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { Field, FieldArray, reduxForm } from "redux-form";
 import validate from "./validate";
 import "./index.css";
@@ -6,12 +8,22 @@ import "./index.css";
 import { renderContacts, renderOutlets } from "./Fields";
 import { StyledBtn, renderField } from "../FormComponents";
 import { CustomSelect } from "../../../components/FormComponent";
+import { provider } from "../../../store/actions";
 
 const ProviderForm = props => {
-  const { handleSubmit, pristine, reset, submitting } = props;
+  const {
+    handleSubmit,
+    pristine,
+    reset,
+    submitting,
+    history,
+    addProvider
+  } = props;
 
   const handleOnSubmit = values => {
-    console.log(values);
+    // addProvider(values);
+    // history.push(`/providers`);
+    console.log(submitting);
   };
 
   return (
@@ -46,7 +58,18 @@ const ProviderForm = props => {
       />
       <FieldArray name="outlets" component={renderOutlets} />
       <FieldArray name="contacts" component={renderContacts} />
-
+      <Field
+        name="totalStaff"
+        type="number"
+        component={renderField}
+        label="Total Staff"
+      />
+      <Field
+        name="totalServiceUsers"
+        type="number"
+        component={renderField}
+        label="Total Service Users"
+      />
       <div
         style={{
           marginBottom: "1rem",
@@ -75,10 +98,12 @@ const ProviderForm = props => {
   );
 };
 
-export default reduxForm({
+const formWrapped = reduxForm({
   form: "fprovider", // a unique identifier for this form
   validate,
   initialValues: {
     contacts: [{ name: "", email: "", mobile: "" }]
   }
-})(ProviderForm);
+})(withRouter(ProviderForm));
+
+export default connect(null, { ...provider })(formWrapped);

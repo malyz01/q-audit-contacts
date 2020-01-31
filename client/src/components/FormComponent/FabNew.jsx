@@ -1,14 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 
 const useStyles = makeStyles(theme => ({
   fab: {
     margin: theme.spacing(1)
   },
   extendedIcon: {
-    marginRight: theme.spacing(1)
+    marginRight: ".2rem"
   }
 }));
 
@@ -19,11 +19,12 @@ export default function FloatingActionButtons(props) {
     <Fab
       {...props}
       variant="extended"
+      size="medium"
       aria-label={props.name}
       className={classes.fab}
     >
-      <AddCircleOutlineIcon className={classes.extendedIcon} />
-      {props.name}
+      <LibraryAddIcon className={classes.extendedIcon} />
+      <div style={{ marginRight: ".5rem" }}>{props.name}</div>
     </Fab>
   );
 }

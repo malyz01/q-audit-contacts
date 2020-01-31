@@ -58,7 +58,7 @@ class index extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  auditor: state.auditor.selected
+  auditor: state.auditors.selected
 });
 
 export default connect(mapStateToProps, { ...auditor })(index);

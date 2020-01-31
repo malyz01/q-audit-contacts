@@ -1,18 +1,36 @@
 import React from "react";
-import { Container, Box } from "@material-ui/core";
+import { connect } from "react-redux";
+import _ from "lodash";
+import Box from "@material-ui/core/Box";
+import "./index.css";
 
 import Table from "./Table";
+import Loading from "../../components/Loader";
+import { provider } from "../../store/actions";
 
 class index extends React.Component {
+  componentDidMount() {
+    this.props.fetchProviders();
+  }
+
+  componentWillUnmount() {
+    this.props.allClearProvider();
+  }
+
   render() {
+    if (_.isEmpty(this.props.providers)) {
+      return <Loading />;
+    }
     return (
-      <Container>
-        <Box mt={2}>
-          <Table />
-        </Box>
-      </Container>
+      <Box mt={2} mx="auto" width="80%">
+        <Table />
+      </Box>
     );
   }
 }
 
-export default index;
+const mapStateToProps = state => ({
+  providers: state.providers.all
+});
+
+export default connect(mapStateToProps, { ...provider })(index);

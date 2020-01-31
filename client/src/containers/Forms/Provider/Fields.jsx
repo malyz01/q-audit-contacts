@@ -4,7 +4,7 @@ import { Field } from "redux-form";
 import { StyledBtn, renderField } from "../FormComponents";
 
 export const renderOutlets = ({ fields, meta: { error, submitFailed } }) => (
-  <div style={{ paddingLeft: "4rem" }}>
+  <div style={{ paddingLeft: "4rem", marginBottom: "1rem" }}>
     {fields.map((outlet, index) => (
       <div key={index}>
         <h4>Outlet {index + 1}</h4>
@@ -52,7 +52,7 @@ export const renderOutlets = ({ fields, meta: { error, submitFailed } }) => (
 );
 
 export const renderContacts = ({ fields, meta: { error, submitFailed } }) => (
-  <>
+  <div style={{ marginBottom: "2rem" }}>
     {fields.map((contacts, index) => (
       <div key={index}>
         <h4>Contact {index + 1}</h4>
@@ -61,6 +61,12 @@ export const renderContacts = ({ fields, meta: { error, submitFailed } }) => (
           type="text"
           component={renderField}
           label="Full name"
+        />
+        <Field
+          name={`${contacts}.position`}
+          type="text"
+          component={renderField}
+          label="Position"
         />
         <Field
           name={`${contacts}.email`}
@@ -90,7 +96,7 @@ export const renderContacts = ({ fields, meta: { error, submitFailed } }) => (
     <div
       style={{
         display: "flex",
-        justifyContent: "flex-start",
+        justifyContent: "flex-end",
         paddingTop: ".5rem"
       }}
     >
@@ -104,5 +110,5 @@ export const renderContacts = ({ fields, meta: { error, submitFailed } }) => (
       </StyledBtn>
       {submitFailed && error && <span>{error}</span>}
     </div>
-  </>
+  </div>
 );

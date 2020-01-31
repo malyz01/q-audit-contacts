@@ -1,41 +1,36 @@
-import React from "react";
-import MaterialTable from "material-table";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import MaterialTable from "material-table";
+import Box from "@material-ui/core/Box";
 import { FabNew } from "../../components/FormComponent";
 
-const ProviderPage = ({ history }) => {
-  const [state, setState] = React.useState({
-    columns: [
-      { title: "Legal Name", field: "legalName" },
-      { title: "Trading Name", field: "tradingName" },
-      { title: "Application Ref Number", field: "applicationRefNumber" },
-      {
-        title: "Registration Number",
-        field: "registrationNumber"
-      },
-      { title: "Head Office", field: "headOffice" },
-      { title: "Country", field: "country" }
-    ],
-    data: [
-      {
-        legalName: "Mehmet",
-        tradingName: "Baran",
-        applicationRefNumber: "A-SDAS",
-        registrationNumber: "ASDQW",
-        headOffice: "",
-        country: ""
-      },
-      {
-        legalName: "Second",
-        tradingName: "Provider",
-        applicationRefNumber: "A-SDAS",
-        registrationNumber: "ASDQW",
-        headOffice: "",
-        country: ""
-      }
-    ]
-  });
+const ProviderPage = ({ history, providers }) => {
+  const [selectedRow, setSelectedRow] = useState(null);
+
+  const data = providers.map(({ _id, isActive, data }) => ({
+    _id,
+    legalName: data.legalName,
+    tradingName: data.tradingName,
+    abn: data.abn,
+    acn: data.acn,
+    country: data.country,
+    isActive: isActive ? "Active" : "InActive"
+  }));
+  const columns = [
+    { title: "Legal Name", field: "legalName" },
+    { title: "Trading Name", field: "tradingName" },
+    {
+      title: "ABN",
+      field: "abn"
+    },
+    {
+      title: "ACN",
+      field: "acn"
+    },
+    { title: "Country", field: "country" },
+    { title: "Status", field: "isActive" }
+  ];
 
   const handleOnClick = () => {
     history.push(`/providers/new`);
@@ -43,47 +38,26 @@ const ProviderPage = ({ history }) => {
 
   return (
     <div>
-      <FabNew color="primary" onClick={handleOnClick} name="Provider" />
+      <Box mb={1}>
+        <FabNew color="primary" onClick={handleOnClick} name="Provider" />
+        <button onClick={() => setSelectedRow(null)}>Clear</button>
+      </Box>
       <MaterialTable
         title="Provider List"
-        columns={state.columns}
-        data={state.data}
-        editable={{
-          onRowAdd: newData =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve();
-                setState(prevState => {
-                  const data = [...prevState.data];
-                  data.push(newData);
-                  return { ...prevState, data };
-                });
-              }, 600);
-            }),
-          onRowUpdate: (newData, oldData) =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve();
-                if (oldData) {
-                  setState(prevState => {
-                    const data = [...prevState.data];
-                    data[data.indexOf(oldData)] = newData;
-                    return { ...prevState, data };
-                  });
-                }
-              }, 600);
-            }),
-          onRowDelete: oldData =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve();
-                setState(prevState => {
-                  const data = [...prevState.data];
-                  data.splice(data.indexOf(oldData), 1);
-                  return { ...prevState, data };
-                });
-              }, 600);
-            })
+        columns={columns}
+        data={data}
+        onRowClick={(e, data) => setSelectedRow(data)}
+        options={{
+          rowStyle: rowData => ({
+            backgroundColor:
+              selectedRow && selectedRow.tableData.id === rowData.tableData.id
+                ? "#EEE"
+                : "#FFF"
+          }),
+          pageSize: 10,
+          pageSizeOptions: [5, 10, 20],
+          searchFieldAlignment: "left",
+          showTitle: false
         }}
       />
     </div>
@@ -91,7 +65,7 @@ const ProviderPage = ({ history }) => {
 };
 
 const mapStateToProps = state => ({
-  providers: state
+  providers: state.providers.all
 });
 
 export default connect(mapStateToProps)(withRouter(ProviderPage));

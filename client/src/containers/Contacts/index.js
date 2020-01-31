@@ -137,8 +137,8 @@ export class Main extends Component {
 }
 
 const mapStateToProps = state => ({
-  auditors: state.auditor.all,
-  selected: state.auditor.selected
+  auditors: state.auditors.all,
+  selected: state.auditors.selected
 });
 
 export default connect(mapStateToProps, { ...auditor })(withRouter(Main));

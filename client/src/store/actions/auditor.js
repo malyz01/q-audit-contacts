@@ -11,7 +11,7 @@ import {
 export default {
   fetchAuditor: id => async dispatch => {
     try {
-      const response = await api.get(`/auditor/${id}`);
+      const response = await api.get(`/auditors/${id}`);
       dispatch({
         type: FETCH_AUDITOR,
         payload: response.data
@@ -23,7 +23,7 @@ export default {
   },
   fetchAuditors: () => async dispatch => {
     try {
-      const response = await api.get("/auditor");
+      const response = await api.get("/auditors");
       dispatch({
         type: FETCH_AUDITORS,
         payload: response.data
@@ -41,7 +41,7 @@ export default {
   }),
   addAuditor: data => async dispatch => {
     try {
-      const response = await api.post("/auditor", data);
+      const response = await api.post("/auditors", data);
       dispatch({
         type: ADD_AUDITOR,
         payload: response.data
@@ -53,7 +53,7 @@ export default {
   },
   editAuditor: (id, data) => async dispatch => {
     try {
-      const response = await api.patch(`/auditor/${id}`, data);
+      const response = await api.patch(`/auditors/${id}`, data);
       dispatch({
         type: FETCH_AUDITOR,
         payload: response.data
@@ -65,7 +65,7 @@ export default {
   },
   deleteAuditor: id => async dispatch => {
     try {
-      const response = await api.delete(`/auditor/${id}`);
+      const response = await api.delete(`/auditors/${id}`);
       return response.status === 200;
     } catch (e) {
       dispatch(err.add(e));

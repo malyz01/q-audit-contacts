@@ -35,7 +35,7 @@ class AuditView extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  selected: state.auditor.selected
+  selected: state.auditors.selected
 });
 
 export default connect(mapStateToProps, { ...auditor })(AuditView);
