@@ -30,6 +30,7 @@ const providerSchema = new mongoose.Schema({
         mobile: { type: String, unique: true, required: true }
       }
     ],
+    standards: [{ type: String, unique: true }],
     totalStaff: { type: Number, required: true },
     totalServiceUsers: { type: Number, required: true }
   },
