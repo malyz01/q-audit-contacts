@@ -20,7 +20,7 @@ const auditSchema = new mongoose.Schema({
     startDate: { type: Date, default: "" },
     endDate: { type: Date, default: "" },
     dateStatus: { type: String, default: "" }, //Proposed, Tentative, "Confirmed"
-    standards: [{ _id: false, type: String, unique: true }], //NDIS, ISO, ACIS2018, ISO9000
+    standards: [{ _id: false, type: String, unique: true }], //NDIS, ISO, ACIS2018, ISO9001, NZS8134, NZS8165, NZS8164, Urgent Care, NZS8158, NZS8157
     ndis: { type: mongoose.Schema.Types.ObjectId, ref: "NDIS" },
     acis2018: { type: mongoose.Schema.Types.ObjectId, ref: "ACIS2018" },
     hsqf: { type: mongoose.Schema.Types.ObjectId, ref: "HSQF" },

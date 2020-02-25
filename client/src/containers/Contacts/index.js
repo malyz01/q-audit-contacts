@@ -104,7 +104,9 @@ export class Main extends Component {
             _.lowerCase(filter.value)
           )
         }
-        data={this.props.auditors}
+        data={this.props.auditors.sort((a, b) =>
+          a.firstname > b.firstname ? 1 : -1
+        )}
         columns={columns}
         className="contactsTable"
         getTdProps={this.handleTdProps}

@@ -10,9 +10,9 @@ const providerSchema = new mongoose.Schema({
   data: {
     legalName: { type: String, required: true },
     tradingName: { type: String, required: true },
-    abn: { type: String, required: true },
-    acn: { type: String, default: "" },
-    country: { type: String, default: "" },
+    abn_nzbn: { type: String, required: true }, //Australian or NZ Business Number
+    acn_nzcn: { type: String, default: "" }, // Company number
+    country: { type: String, default: "" }, //Australia, New Zealand
     state: { type: String, default: "" },
     headOffice: { type: String, default: "" },
     outlets: [
@@ -30,9 +30,10 @@ const providerSchema = new mongoose.Schema({
         mobile: { type: String, unique: true, required: true }
       }
     ],
-    standards: [{ type: String, unique: true }],
+
+    standards: [{ type: String, unique: true }], //NDIS, ISO, ACIS2018, ISO9001, NZS8134, NZS8165, NZS8164, Urgent Care, NZS8158, NZS8157
     totalStaff: { type: Number, required: true },
-    totalServiceUsers: { type: Number, required: true }
+    totalParticipants: { type: Number, required: true }
   },
   audits: [{ _id: false, type: mongoose.Schema.Types.ObjectId, ref: "Audit" }],
   comments: [

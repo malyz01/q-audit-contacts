@@ -11,14 +11,7 @@ import { CustomSelect } from "../../../components/FormComponent";
 import { provider } from "../../../store/actions";
 
 const ProviderForm = props => {
-  const {
-    handleSubmit,
-    pristine,
-    reset,
-    submitting,
-    history,
-    addProvider
-  } = props;
+  const { handleSubmit, pristine, reset, submitting } = props;
 
   const handleOnSubmit = values => {
     // addProvider(values);
