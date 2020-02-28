@@ -4,5 +4,7 @@ to run:
 - open terminal by pressing 
     ctrl + ~
 
+
+(if terminal is open skip above step)
 - type the following and press enter
     npm run dev
