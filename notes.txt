@@ -1,4 +1,4 @@
-to run:
+to run: (make sure you are in the right folder "/qauditcontacts (master)")
 
 (if terminal not opened)
 - open terminal by pressing 
