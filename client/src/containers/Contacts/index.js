@@ -80,7 +80,7 @@ export class Main extends Component {
           copy(`${firstname} ${lastname}`)
           setTimeout(() => {
             copy(`${email} ${mobileNum}`)
-          }, 300)
+          }, 400)
         },
         style: {
           borderLeft: rowInfo.index === selected.index && "4px solid #3F51B5",
