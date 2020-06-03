@@ -23,6 +23,7 @@
   "homepage": "https://github.com/malyz01/q-audit-contacts#readme",
   "dependencies": {
     "concurrently": "^4.1.2",
+    "copy-to-clipboard": "^3.3.1",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
