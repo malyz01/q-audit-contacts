@@ -9,6 +9,7 @@ import AuditorDetails from "../containers/Contacts/AuditorDetails";
 import ProviderPage from "../containers/ProviderPage";
 import { Header } from "../components/FormComponent";
 import { AuditorForm, ProviderForm, AuditForm } from "../containers/Forms";
+import NewProvider from '../containers/ProviderPage/Form/New'
 
 class Main extends React.Component {
   render() {
@@ -27,7 +28,7 @@ class Main extends React.Component {
           <Route path="/audits/new" exact component={AuditForm} />
 
           <Route path="/providers" exact component={ProviderPage} />
-          <Route path="/providers/new" exact component={ProviderForm} />
+          <Route path="/providers/new" exact component={NewProvider} />
 
           {/* <Route
             path="/login"
@@ -38,7 +39,7 @@ class Main extends React.Component {
           /> */}
         </Switch>
       </div>
-    );
+    )
   }
 }
 
