@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import * as copy from 'copy-to-clipboard'
+import * as copy from "copy-to-clipboard";
 import _ from "lodash";
 
 import "./index.css";
@@ -40,6 +40,16 @@ export class Main extends Component {
           this.props.fetchAuditors();
         }
         break;
+      case "COPY":
+        const { firstname, lastname, email, mobile } = this.props.selected;
+        const mNum = mobile[0];
+        const mobileNum =
+          mNum.length > 12 ? `0${mNum.substring(4, mNum.length)}` : mNum;
+        copy(`${firstname} ${lastname} (Remotely)`);
+        setTimeout(() => {
+          copy(`${email} ${mobileNum}`);
+        }, 400);
+        break;
       case "CLEAR":
         this.props.clearAuditor();
         break;
@@ -70,17 +80,18 @@ export class Main extends Component {
   handleTrProps = (state, rowInfo, column, instance) => {
     const { selectAuditor, selected } = this.props;
     if (rowInfo && rowInfo.row) {
-      const { firstname, lastname, email, mobile } = rowInfo.original
-      const mNum = mobile[0]
-      const mobileNum = mNum.length > 12 ? `0${mNum.substring(4, mNum.length)}` : mNum
+      // const { firstname, lastname, email, mobile } = rowInfo.original;
+      // const mNum = mobile[0];
+      // const mobileNum =
+      //   mNum.length > 12 ? `0${mNum.substring(4, mNum.length)}` : mNum;
       return {
         onClick: e => {
           rowInfo.original.index = rowInfo.index;
           selectAuditor(rowInfo.original);
-          copy(`${firstname} ${lastname}`)
-          setTimeout(() => {
-            copy(`${email} ${mobileNum}`)
-          }, 400)
+          // copy(`${firstname} ${lastname} (Remotely)`);
+          // setTimeout(() => {
+          //   copy(`${email} ${mobileNum}`);
+          // }, 400);
         },
         style: {
           borderLeft: rowInfo.index === selected.index && "4px solid #3F51B5",

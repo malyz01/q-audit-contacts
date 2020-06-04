@@ -3,7 +3,8 @@ import {
   FabView,
   FabEdit,
   FabDel,
-  FabClear
+  FabClear,
+  FabCopy
 } from "../../components/FormComponent";
 
 export default props => (
@@ -12,5 +13,6 @@ export default props => (
     <FabEdit color="primary" name="Edit" />
     <FabDel color="primary" name="Delete" />
     <FabClear color="primary" name="Clear" />
+    <FabCopy color="primary" name="Copy" />
   </div>
 );

@@ -9,6 +9,7 @@ import FabView from "./FabView";
 import FabEdit from "./FabEdit";
 import FabDel from "./FabDel";
 import FabClear from "./FabClear";
+import FabCopy from "./FabCopy";
 
 export {
   Button,
@@ -21,5 +22,6 @@ export {
   FabView,
   FabEdit,
   FabDel,
-  FabClear
+  FabClear,
+  FabCopy
 };
