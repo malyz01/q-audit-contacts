@@ -10,8 +10,8 @@ const providerSchema = new mongoose.Schema({
   data: {
     legalName: { type: String, required: true },
     tradingName: { type: String, required: true },
-    abn_nzbn: { type: String, required: true }, //Australian or NZ Business Number
-    acn_nzcn: { type: String, default: "" }, // Company number
+    bn: { type: String, required: true }, //Australian or NZ Business Number
+    cn: { type: String, default: "" }, // Company number
     country: { type: String, default: "" }, //Australia, New Zealand
     state: { type: String, default: "" },
     headOffice: { type: String, default: "" },

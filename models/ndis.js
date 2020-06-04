@@ -6,7 +6,7 @@ const ndisSchema = new mongoose.Schema({
     ref: "audit"
   },
   data: {
-    proposalSignedDate: { type: Date, default: "" },
+    proposalSignedDate: { type: Date, default: null },
     isLinked: { type: Boolean, default: false },
     newRenew: { type: String, default: "" },
     applicationRefNumber: { type: String, default: "" },
