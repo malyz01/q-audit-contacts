@@ -1,3 +1,3 @@
 # q-audit-contacts
 
-This has been depracated
+This has been deprecated
